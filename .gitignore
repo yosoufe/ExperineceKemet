@@ -1,7 +1,6 @@
 # STCubeIDE
 *.metadata
 **/Debug
-**/Drivers
 
 # Prerequisites
 *.d
