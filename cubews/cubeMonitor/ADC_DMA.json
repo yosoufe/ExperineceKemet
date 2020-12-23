@@ -1,0 +1,788 @@
+[
+    {
+        "id": "ad48e565.cbf098",
+        "type": "tab",
+        "label": "Basic_Flow",
+        "disabled": false,
+        "info": "# Basic flow to start with STM32CubeMonitor."
+    },
+    {
+        "id": "6808ce9b.9aafc",
+        "type": "ui_chartst",
+        "z": "ad48e565.cbf098",
+        "group": "f9c34dde.1e2f4",
+        "name": "myChart",
+        "order": 4,
+        "width": 15,
+        "height": 9,
+        "chartType": "line",
+        "curveType": "linear",
+        "duration": "1.5",
+        "ymin": "",
+        "ymax": "",
+        "x": 580,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "4309c10d.5006d",
+        "type": "acquisition out",
+        "z": "ad48e565.cbf098",
+        "name": "myProbe_Out",
+        "probeconfig": "bc431c6c.ad1b3",
+        "x": 520,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c209b7d2.4f51e8",
+        "type": "acquisition in",
+        "z": "ad48e565.cbf098",
+        "name": "myProbe_In",
+        "probeconfig": "faf58f9f.e9391",
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "d0335cd3.2dbd"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c6ce7e8f.d5c34",
+        "type": "variables",
+        "z": "ad48e565.cbf098",
+        "groupname": "myVariables",
+        "accesspoint": 0,
+        "execonfig": "6cdd99c.1f59368",
+        "variablelist": [],
+        "triggerstartmode": "manual",
+        "triggername": "aADCxConvertedData[0]",
+        "triggerthreshold": "30000",
+        "frequency": "",
+        "frequencyType": "0",
+        "snapshotheader": "",
+        "mode": "direct",
+        "lastImportedTime": 1608693196307,
+        "openStatus": true,
+        "x": 330,
+        "y": 120,
+        "wires": [
+            [
+                "4309c10d.5006d"
+            ]
+        ]
+    },
+    {
+        "id": "a8da21d.8a447e",
+        "type": "ui_button",
+        "z": "ad48e565.cbf098",
+        "name": "",
+        "group": "f9c34dde.1e2f4",
+        "order": 3,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "Clear Graphs",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "clear",
+        "x": 290,
+        "y": 420,
+        "wires": [
+            [
+                "6808ce9b.9aafc"
+            ]
+        ]
+    },
+    {
+        "id": "421bc31d.6ed78c",
+        "type": "ui_button",
+        "z": "ad48e565.cbf098",
+        "name": "",
+        "group": "f9c34dde.1e2f4",
+        "order": 1,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "START Acquisition",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "start",
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "c6ce7e8f.d5c34"
+            ]
+        ]
+    },
+    {
+        "id": "fb563b67.85a638",
+        "type": "ui_button",
+        "z": "ad48e565.cbf098",
+        "name": "",
+        "group": "f9c34dde.1e2f4",
+        "order": 2,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "label": "STOP Acquisition",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "stop",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "c6ce7e8f.d5c34"
+            ]
+        ]
+    },
+    {
+        "id": "d0335cd3.2dbd",
+        "type": "processing",
+        "z": "ad48e565.cbf098",
+        "groupname": "myVariables",
+        "groupid": "c6ce7e8f.d5c34",
+        "expressions": [],
+        "statistics": [],
+        "logmode": "no",
+        "x": 350,
+        "y": 280,
+        "wires": [
+            [
+                "6808ce9b.9aafc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f9c34dde.1e2f4",
+        "type": "ui_group",
+        "z": "",
+        "name": "Chart",
+        "tab": "17d09b07.741a55",
+        "order": 1,
+        "disp": true,
+        "width": 15,
+        "collapse": false
+    },
+    {
+        "id": "bc431c6c.ad1b3",
+        "type": "probe",
+        "z": "",
+        "probeid": "004C002A3438510134313939",
+        "probename": "ST-Link v3-E (...13939)",
+        "protocol": "SWD",
+        "frequency": "24000 kHz",
+        "probeproperty": "{\"SWD\":[\"24000 kHz\",\"8000 kHz\",\"3300 kHz\",\"1000 kHz\",\"200 kHz\",\"50 kHz\",\"5 kHz\"],\"JTAG\":[\"21333 kHz\",\"16000 kHz\",\"12000 kHz\",\"8000 kHz\",\"1777 kHz\",\"750 kHz\"]}",
+        "probeversion": "ST Link firmware version V3.J7",
+        "connectionType": "p2p"
+    },
+    {
+        "id": "faf58f9f.e9391",
+        "type": "probe",
+        "z": "",
+        "probeid": "004C002A3438510134313939",
+        "probename": "ST-Link v3-E (...13939)",
+        "protocol": "SWD",
+        "frequency": "24000 kHz",
+        "probeproperty": "{\"SWD\":[\"24000 kHz\",\"8000 kHz\",\"3300 kHz\",\"1000 kHz\",\"200 kHz\",\"50 kHz\",\"5 kHz\"],\"JTAG\":[\"21333 kHz\",\"16000 kHz\",\"12000 kHz\",\"8000 kHz\",\"1777 kHz\",\"750 kHz\"]}",
+        "probeversion": "ST Link firmware version V3.J7",
+        "connectionType": "p2p"
+    },
+    {
+        "id": "6cdd99c.1f59368",
+        "type": "exe-config",
+        "z": "",
+        "name": "ADC_DMA_EXAMPLE",
+        "exefile": "/home/yousof/projects/VibrationSensorDesignChallenge/cubews/ADC_DMA_Transfer/SW4STM32/STM32H743ZI-Nucleo/Debug/ADC_DMA_Transfer.elf",
+        "exefolder": "/home/yousof/projects/VibrationSensorDesignChallenge/cubews/ADC_DMA_Transfer/SW4STM32/STM32H743ZI-Nucleo/Debug",
+        "exevariablelist": [
+            {
+                "address": "0x24000040",
+                "name": "aADCxConvertedData[0]",
+                "type": 3,
+                "checked": true
+            },
+            {
+                "address": "0x24000054",
+                "name": "aADCxConvertedData[10]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000056",
+                "name": "aADCxConvertedData[11]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000058",
+                "name": "aADCxConvertedData[12]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400005a",
+                "name": "aADCxConvertedData[13]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400005c",
+                "name": "aADCxConvertedData[14]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400005e",
+                "name": "aADCxConvertedData[15]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000060",
+                "name": "aADCxConvertedData[16]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000062",
+                "name": "aADCxConvertedData[17]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000064",
+                "name": "aADCxConvertedData[18]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000066",
+                "name": "aADCxConvertedData[19]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000042",
+                "name": "aADCxConvertedData[1]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000068",
+                "name": "aADCxConvertedData[20]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400006a",
+                "name": "aADCxConvertedData[21]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400006c",
+                "name": "aADCxConvertedData[22]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400006e",
+                "name": "aADCxConvertedData[23]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000070",
+                "name": "aADCxConvertedData[24]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000072",
+                "name": "aADCxConvertedData[25]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000074",
+                "name": "aADCxConvertedData[26]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000076",
+                "name": "aADCxConvertedData[27]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000078",
+                "name": "aADCxConvertedData[28]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400007a",
+                "name": "aADCxConvertedData[29]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000044",
+                "name": "aADCxConvertedData[2]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400007c",
+                "name": "aADCxConvertedData[30]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400007e",
+                "name": "aADCxConvertedData[31]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000046",
+                "name": "aADCxConvertedData[3]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000048",
+                "name": "aADCxConvertedData[4]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400004a",
+                "name": "aADCxConvertedData[5]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400004c",
+                "name": "aADCxConvertedData[6]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2400004e",
+                "name": "aADCxConvertedData[7]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000050",
+                "name": "aADCxConvertedData[8]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000052",
+                "name": "aADCxConvertedData[9]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x24000148",
+                "name": "AdcHandle.DMA_Handle",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000154",
+                "name": "AdcHandle.ErrorCode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000100",
+                "name": "AdcHandle.Init.ClockPrescaler",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000111",
+                "name": "AdcHandle.Init.ContinuousConvMode",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x24000128",
+                "name": "AdcHandle.Init.ConversionDataManagement",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000118",
+                "name": "AdcHandle.Init.DiscontinuousConvMode",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2400010c",
+                "name": "AdcHandle.Init.EOCSelection",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000120",
+                "name": "AdcHandle.Init.ExternalTrigConv",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000124",
+                "name": "AdcHandle.Init.ExternalTrigConvEdge",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000130",
+                "name": "AdcHandle.Init.LeftBitShift",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000110",
+                "name": "AdcHandle.Init.LowPowerAutoWait",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x24000114",
+                "name": "AdcHandle.Init.NbrOfConversion",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2400011c",
+                "name": "AdcHandle.Init.NbrOfDiscConversion",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2400012c",
+                "name": "AdcHandle.Init.Overrun",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000144",
+                "name": "AdcHandle.Init.Oversampling.OversamplingStopReset",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000138",
+                "name": "AdcHandle.Init.Oversampling.Ratio",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2400013c",
+                "name": "AdcHandle.Init.Oversampling.RightBitShift",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000140",
+                "name": "AdcHandle.Init.Oversampling.TriggeredMode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000134",
+                "name": "AdcHandle.Init.OversamplingMode",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x24000104",
+                "name": "AdcHandle.Init.Resolution",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000108",
+                "name": "AdcHandle.Init.ScanConvMode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2400015c",
+                "name": "AdcHandle.InjectionConfig.ChannelCount",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000158",
+                "name": "AdcHandle.InjectionConfig.ContextQueue",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x240000fc",
+                "name": "AdcHandle.Instance",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2400014c",
+                "name": "AdcHandle.Lock",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x24000150",
+                "name": "AdcHandle.State",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x00000000",
+                "name": "BUTTON_IRQn[0]",
+                "type": 4,
+                "checked": false
+            },
+            {
+                "address": "0x00000000",
+                "name": "BUTTON_PIN[0]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x00000000",
+                "name": "BUTTON_PORT[0]",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x08003910",
+                "name": "D1CorePrescTable[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x0800391a",
+                "name": "D1CorePrescTable[10]",
+                "type": 1
+            },
+            {
+                "address": "0x0800391b",
+                "name": "D1CorePrescTable[11]",
+                "type": 1
+            },
+            {
+                "address": "0x0800391c",
+                "name": "D1CorePrescTable[12]",
+                "type": 1
+            },
+            {
+                "address": "0x0800391d",
+                "name": "D1CorePrescTable[13]",
+                "type": 1
+            },
+            {
+                "address": "0x0800391e",
+                "name": "D1CorePrescTable[14]",
+                "type": 1
+            },
+            {
+                "address": "0x0800391f",
+                "name": "D1CorePrescTable[15]",
+                "type": 1
+            },
+            {
+                "address": "0x08003911",
+                "name": "D1CorePrescTable[1]",
+                "type": 1
+            },
+            {
+                "address": "0x08003912",
+                "name": "D1CorePrescTable[2]",
+                "type": 1
+            },
+            {
+                "address": "0x08003913",
+                "name": "D1CorePrescTable[3]",
+                "type": 1
+            },
+            {
+                "address": "0x08003914",
+                "name": "D1CorePrescTable[4]",
+                "type": 1
+            },
+            {
+                "address": "0x08003915",
+                "name": "D1CorePrescTable[5]",
+                "type": 1
+            },
+            {
+                "address": "0x08003916",
+                "name": "D1CorePrescTable[6]",
+                "type": 1
+            },
+            {
+                "address": "0x08003917",
+                "name": "D1CorePrescTable[7]",
+                "type": 1
+            },
+            {
+                "address": "0x08003918",
+                "name": "D1CorePrescTable[8]",
+                "type": 1
+            },
+            {
+                "address": "0x08003919",
+                "name": "D1CorePrescTable[9]",
+                "type": 1
+            },
+            {
+                "address": "0x080038fc",
+                "name": "LED_PIN[0]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x080038fe",
+                "name": "LED_PIN[1]",
+                "type": 3
+            },
+            {
+                "address": "0x08003900",
+                "name": "LED_PIN[2]",
+                "type": 3
+            },
+            {
+                "address": "0x08003904",
+                "name": "LED_PORT[0]",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x08003908",
+                "name": "LED_PORT[1]",
+                "type": 5
+            },
+            {
+                "address": "0x0800390c",
+                "name": "LED_PORT[2]",
+                "type": 5
+            },
+            {
+                "address": "0x24000160",
+                "name": "sConfig.Channel",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000174",
+                "name": "sConfig.Offset",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000170",
+                "name": "sConfig.OffsetNumber",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000178",
+                "name": "sConfig.OffsetRightShift",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x24000179",
+                "name": "sConfig.OffsetSignedSaturation",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x24000164",
+                "name": "sConfig.Rank",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000168",
+                "name": "sConfig.SamplingTime",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2400016c",
+                "name": "sConfig.SingleDiff",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000000",
+                "name": "SystemCoreClock",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000004",
+                "name": "SystemD2Clock",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x240000f8",
+                "name": "uwTick",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x24000008",
+                "name": "uwTickFreq",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2400000c",
+                "name": "uwTickPrio",
+                "type": 5,
+                "checked": false
+            }
+        ],
+        "expand": true,
+        "filename": "ADC_DMA_Transfer.elf",
+        "exeModifiedTime": 1608691502653,
+        "configLastUpdate": 1608693195974
+    },
+    {
+        "id": "17d09b07.741a55",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

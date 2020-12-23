@@ -1,0 +1,542 @@
+[
+    {
+        "id": "7b9ed63e.2138f8",
+        "type": "tab",
+        "label": "Basic_Flow",
+        "disabled": false,
+        "info": "# Basic flow to start with STM32CubeMonitor."
+    },
+    {
+        "id": "1ebbb430.dac7dc",
+        "type": "ui_chartst",
+        "z": "7b9ed63e.2138f8",
+        "group": "f9c34dde.1e2f4",
+        "name": "myChart",
+        "order": 4,
+        "width": 15,
+        "height": 9,
+        "chartType": "line",
+        "curveType": "linear",
+        "duration": "10",
+        "ymin": "",
+        "ymax": "",
+        "x": 580,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6013fb0b.5b7504",
+        "type": "acquisition out",
+        "z": "7b9ed63e.2138f8",
+        "name": "myProbe_Out",
+        "probeconfig": "70f24b14.fda704",
+        "x": 600,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "4a573fb0.4bc99",
+        "type": "acquisition in",
+        "z": "7b9ed63e.2138f8",
+        "name": "myProbe_In",
+        "probeconfig": "70f24b14.fda704",
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "a7c3e070.5a6c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d59587ff.cd1748",
+        "type": "variables",
+        "z": "7b9ed63e.2138f8",
+        "groupname": "myVariables",
+        "accesspoint": 0,
+        "execonfig": "ad09a6bf.53eed8",
+        "variablelist": [],
+        "triggerstartmode": "manual",
+        "triggername": "uhADCxConvertedValue",
+        "triggerthreshold": "30000",
+        "frequency": "",
+        "frequencyType": "0",
+        "snapshotheader": "",
+        "mode": "direct",
+        "lastImportedTime": 1608623307196,
+        "openStatus": true,
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [
+                "6013fb0b.5b7504"
+            ]
+        ]
+    },
+    {
+        "id": "fc00295e.79ada8",
+        "type": "ui_button",
+        "z": "7b9ed63e.2138f8",
+        "name": "",
+        "group": "f9c34dde.1e2f4",
+        "order": 3,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "Clear Graphs",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "clear",
+        "x": 430,
+        "y": 380,
+        "wires": [
+            [
+                "1ebbb430.dac7dc"
+            ]
+        ]
+    },
+    {
+        "id": "5fd51c96.2330e4",
+        "type": "ui_button",
+        "z": "7b9ed63e.2138f8",
+        "name": "",
+        "group": "f9c34dde.1e2f4",
+        "order": 1,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "START Acquisition",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "start",
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "d59587ff.cd1748"
+            ]
+        ]
+    },
+    {
+        "id": "52eadfe3.2c8cc",
+        "type": "ui_button",
+        "z": "7b9ed63e.2138f8",
+        "name": "",
+        "group": "f9c34dde.1e2f4",
+        "order": 2,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "label": "STOP Acquisition",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "stop",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "d59587ff.cd1748"
+            ]
+        ]
+    },
+    {
+        "id": "a7c3e070.5a6c",
+        "type": "processing",
+        "z": "7b9ed63e.2138f8",
+        "groupname": "myVariables",
+        "groupid": "d59587ff.cd1748",
+        "expressions": [],
+        "statistics": [],
+        "logmode": "no",
+        "x": 350,
+        "y": 280,
+        "wires": [
+            [
+                "1ebbb430.dac7dc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f9c34dde.1e2f4",
+        "type": "ui_group",
+        "z": "",
+        "name": "Chart",
+        "tab": "17d09b07.741a55",
+        "order": 1,
+        "disp": true,
+        "width": 15,
+        "collapse": false
+    },
+    {
+        "id": "70f24b14.fda704",
+        "type": "probe",
+        "z": "",
+        "probeid": "004C002A3438510134313939",
+        "probename": "ST-Link v3-E (...13939)",
+        "protocol": "SWD",
+        "frequency": "24000 kHz",
+        "probeproperty": "{\"SWD\":[\"24000 kHz\",\"8000 kHz\",\"3300 kHz\",\"1000 kHz\",\"200 kHz\",\"50 kHz\",\"5 kHz\"],\"JTAG\":[\"21333 kHz\",\"16000 kHz\",\"12000 kHz\",\"8000 kHz\",\"1777 kHz\",\"750 kHz\"]}",
+        "probeversion": "ST Link firmware version V3.J7",
+        "connectionType": "p2p"
+    },
+    {
+        "id": "ad09a6bf.53eed8",
+        "type": "exe-config",
+        "z": "",
+        "name": "ADC_EXAMPLE",
+        "exefile": "/home/yousof/projects/VibrationSensorDesignChallenge/cubews/ADC_RegularConversion_Polling/SW4STM32/STM32H743ZI-Nucleo/Debug/ADC_RegularConversion_Polling.elf",
+        "exefolder": "/home/yousof/projects/VibrationSensorDesignChallenge/cubews/ADC_RegularConversion_Polling/SW4STM32/STM32H743ZI-Nucleo/Debug",
+        "exevariablelist": [
+            {
+                "address": "0x20000080",
+                "name": "AdcHandle.DMA_Handle",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000008c",
+                "name": "AdcHandle.ErrorCode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000038",
+                "name": "AdcHandle.Init.ClockPrescaler",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000049",
+                "name": "AdcHandle.Init.ContinuousConvMode",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000060",
+                "name": "AdcHandle.Init.ConversionDataManagement",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000050",
+                "name": "AdcHandle.Init.DiscontinuousConvMode",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000044",
+                "name": "AdcHandle.Init.EOCSelection",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000058",
+                "name": "AdcHandle.Init.ExternalTrigConv",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000005c",
+                "name": "AdcHandle.Init.ExternalTrigConvEdge",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000068",
+                "name": "AdcHandle.Init.LeftBitShift",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000048",
+                "name": "AdcHandle.Init.LowPowerAutoWait",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2000004c",
+                "name": "AdcHandle.Init.NbrOfConversion",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000054",
+                "name": "AdcHandle.Init.NbrOfDiscConversion",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000064",
+                "name": "AdcHandle.Init.Overrun",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000007c",
+                "name": "AdcHandle.Init.Oversampling.OversamplingStopReset",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000070",
+                "name": "AdcHandle.Init.Oversampling.Ratio",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000074",
+                "name": "AdcHandle.Init.Oversampling.RightBitShift",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000078",
+                "name": "AdcHandle.Init.Oversampling.TriggeredMode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000006c",
+                "name": "AdcHandle.Init.OversamplingMode",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2000003c",
+                "name": "AdcHandle.Init.Resolution",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000040",
+                "name": "AdcHandle.Init.ScanConvMode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000094",
+                "name": "AdcHandle.InjectionConfig.ChannelCount",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000090",
+                "name": "AdcHandle.InjectionConfig.ContextQueue",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000034",
+                "name": "AdcHandle.Instance",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000084",
+                "name": "AdcHandle.Lock",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000088",
+                "name": "AdcHandle.State",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x00000000",
+                "name": "BUTTON_IRQn[0]",
+                "type": 4,
+                "checked": false
+            },
+            {
+                "address": "0x00000000",
+                "name": "BUTTON_PIN[0]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x00000000",
+                "name": "BUTTON_PORT[0]",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x080028dc",
+                "name": "D1CorePrescTable[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x080028e6",
+                "name": "D1CorePrescTable[10]",
+                "type": 1
+            },
+            {
+                "address": "0x080028e7",
+                "name": "D1CorePrescTable[11]",
+                "type": 1
+            },
+            {
+                "address": "0x080028e8",
+                "name": "D1CorePrescTable[12]",
+                "type": 1
+            },
+            {
+                "address": "0x080028e9",
+                "name": "D1CorePrescTable[13]",
+                "type": 1
+            },
+            {
+                "address": "0x080028ea",
+                "name": "D1CorePrescTable[14]",
+                "type": 1
+            },
+            {
+                "address": "0x080028eb",
+                "name": "D1CorePrescTable[15]",
+                "type": 1
+            },
+            {
+                "address": "0x080028dd",
+                "name": "D1CorePrescTable[1]",
+                "type": 1
+            },
+            {
+                "address": "0x080028de",
+                "name": "D1CorePrescTable[2]",
+                "type": 1
+            },
+            {
+                "address": "0x080028df",
+                "name": "D1CorePrescTable[3]",
+                "type": 1
+            },
+            {
+                "address": "0x080028e0",
+                "name": "D1CorePrescTable[4]",
+                "type": 1
+            },
+            {
+                "address": "0x080028e1",
+                "name": "D1CorePrescTable[5]",
+                "type": 1
+            },
+            {
+                "address": "0x080028e2",
+                "name": "D1CorePrescTable[6]",
+                "type": 1
+            },
+            {
+                "address": "0x080028e3",
+                "name": "D1CorePrescTable[7]",
+                "type": 1
+            },
+            {
+                "address": "0x080028e4",
+                "name": "D1CorePrescTable[8]",
+                "type": 1
+            },
+            {
+                "address": "0x080028e5",
+                "name": "D1CorePrescTable[9]",
+                "type": 1
+            },
+            {
+                "address": "0x080028c8",
+                "name": "LED_PIN[0]",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x080028ca",
+                "name": "LED_PIN[1]",
+                "type": 3
+            },
+            {
+                "address": "0x080028cc",
+                "name": "LED_PIN[2]",
+                "type": 3
+            },
+            {
+                "address": "0x080028d0",
+                "name": "LED_PORT[0]",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x080028d4",
+                "name": "LED_PORT[1]",
+                "type": 5
+            },
+            {
+                "address": "0x080028d8",
+                "name": "LED_PORT[2]",
+                "type": 5
+            },
+            {
+                "address": "0x20000000",
+                "name": "SystemCoreClock",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000004",
+                "name": "SystemD2Clock",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000002c",
+                "name": "uhADCxConvertedValue",
+                "type": 3,
+                "checked": true
+            },
+            {
+                "address": "0x20000030",
+                "name": "uwTick",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000008",
+                "name": "uwTickFreq",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2000000c",
+                "name": "uwTickPrio",
+                "type": 5,
+                "checked": false
+            }
+        ],
+        "expand": true,
+        "filename": "ADC_RegularConversion_Polling.elf",
+        "exeModifiedTime": 1608615831887,
+        "configLastUpdate": 1608623217205
+    },
+    {
+        "id": "17d09b07.741a55",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

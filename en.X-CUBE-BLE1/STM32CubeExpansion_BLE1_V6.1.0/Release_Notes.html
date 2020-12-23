@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Release Notes for X-CUBE-BLE1</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="_htmresc/mini-st.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<div class="col-sm-12 col-lg-4">
+<div class="card fluid">
+<div class="sectione dark">
+<center>
+<h1 id="release-notes-for-x-cube-ble1-software-for-stm32"><small>Release Notes for</small> <strong>X-CUBE-BLE1 Software for STM32</strong></h1>
+<p>Copyright © 2020 STMicroelectronics</p>
+<a href="https://www.st.com" class="logo"><img src="_htmresc/st_logo.png" alt="ST logo" /></a>
+</center>
+</div>
+</div>
+<h1 id="license">License</h1>
+<p>This software package is licensed by ST under ST license SLA0077, the “License”; You may not use this component except in compliance with the License. You may obtain a copy of the License at: <a href="http://www.st.com/content/st_com/en/search.html#q=SLA0077-t=keywords-page=1">http://www.st.com/SLA0077</a></p>
+<h1 id="purpose">Purpose</h1>
+<p>The <strong>X-CUBE-BLE1</strong> is an expansion software package for STM32Cube. This software provides drivers running on STM32 for STM’s BlueNRG-M0 Bluetooth Low Energy device. It also includes the software library for BLE Profiles along with many sample applications. This software package is built on top of STM32Cube software technology that ease portability across different STM32 microcontrollers.</p>
+<p>X-CUBE-BLE1 software features:</p>
+<ul>
+<li>Complete middleware to build applications using BlueNRG-MS network processor, including BLE standard Central and Peripheral profiles.</li>
+<li>Easy portability across different MCU families thanks to STM32Cube.</li>
+<li>Sample applications that the developer can use to start experimenting with the code.</li>
+<li>References to free Android and iOS Apps that can be used along with the sample applications.</li>
+<li>Free, user-friendly license terms.</li>
+<li>Examples implementation available for X-NUCLEO-IDB05A2 STM32 expansion board plugged on top of one NUCLEO-F401RE, NUCLEO-L053R8 or NUCLEO-L476RG.</li>
+</ul>
+<p>The figure below shows the overall architecture.</p>
+<p><a href=""><img src="_htmresc/X-CUBE-BLE1_components.png" alt="X-CUBE-BLE1 Block Diagram" /></a></p>
+<ul>
+<li>At the bottom layer there are the HW components: the STM32 MCU and the BlueNRG-MS network processor.<br />
+</li>
+<li>The drivers abstract low level details of the hardware and allow the middleware software to provide Bluetooth LE features in a hardware independent fashion.</li>
+<li>The applications provide examples of how to use the code.</li>
+</ul>
+<p>Related information and documentation:</p>
+<ul>
+<li><a href="https://www.st.com/content/st_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32cube-expansion-packages/x-cube-BLE1.html">UM1873</a>: Getting started with the X-CUBE-BLE1 Bluetooth Low Energy software expansion for STM32Cube</li>
+<li><a href="https://www.st.com/content/st_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32cube-expansion-packages/x-cube-BLE1.html">AN4642</a>: Overview of the BLE Profiles application for X-CUBE-BLE1, expansion for STM32Cube</li>
+<li><a href="http://www.st.com/stm32cube">STM32Cube</a></li>
+<li><a href="http://www.st.com/stm32nucleo">STM32 Nucleo boards</a></li>
+<li><a href="http://www.st.com/x-nucleo">STM32 Nucleo expansion boards</a></li>
+</ul>
+</div>
+<section id="update-history" class="col-sm-12 col-lg-8">
+<h1>Update History</h1>
+<div class="collapse">
+<input type="checkbox" id="collapse-section25" checked aria-hidden="true"> <label for="collapse-section25" aria-hidden="true">V6.1.0 / 03-Nov-2020</label>
+<div>
+<h2 id="main-changes">Main Changes</h2>
+<ul>
+<li>Align to STMicroelectronics.X-CUBE-BLE1.6.1.0.pack for STM32CubeMX (minimum required version V6.1.0)</li>
+<li>Update on STM32Cube HAL drivers</li>
+<li>Other improvements</li>
+</ul>
+<h2 id="contents">Contents</h2>
+<table>
+<caption>Documentation<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Document</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">X-CUBE-BLE1 API Description</td>
+<td style="text-align: left;">V6.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Documentation\X-CUBE-BLE1.chm">CHM</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Getting Started with X-CUBE-BLE1 pack for STM32CubeMX</td>
+<td style="text-align: left;">V6.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Documentation\STMicroelectronics.X-CUBE-BLE1_GettingStarted.pdf">PDF</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BlueNRG-MS middleware for STM32Cube</td>
+<td style="text-align: left;">V6.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\BlueNRG-MS\doc\BlueNRG-MS_UserManual.chm">CHM</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Drivers<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F4xx CMSIS</td>
+<td style="text-align: left;">V2.6.5</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32F4xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F4xx HAL</td>
+<td style="text-align: left;">V1.7.10</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32F4xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32F4xx_Nucleo</td>
+<td style="text-align: left;">V1.2.7</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32F4xx-Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L0xx CMSIS</td>
+<td style="text-align: left;">V1.9.1</td>
+<td style="text-align: left;"><a href="http://www.apache.org/licenses/">Apache License v2.0</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32L0xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L0xx HAL</td>
+<td style="text-align: left;">V1.10.4</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32L0xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32L0xx_Nucleo</td>
+<td style="text-align: left;">V2.1.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32L0xx_Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L4xx CMSIS</td>
+<td style="text-align: left;">V1.7.0</td>
+<td style="text-align: left;"><a href="http://www.apache.org/licenses/">Apache License v2.0</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32L4xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L4xx HAL</td>
+<td style="text-align: left;">V1.12.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32L4xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32L4xx_Nucleo</td>
+<td style="text-align: left;">V2.1.6</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32L4xx_Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP X-NUCLEO-IDB0xA1</td>
+<td style="text-align: left;">V3.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\X-NUCLEO-IDB0xA1\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Middlewares<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BlueNRG-MS</td>
+<td style="text-align: left;">V5.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\BlueNRG-MS\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LowPowerManager</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\LowPowerManager\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TimerServer</td>
+<td style="text-align: left;">V1.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\TimerServer\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Projects</td>
+<td style="text-align: left;">V5.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Projects\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Utilities</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Flash Updater Tool</td>
+<td style="text-align: left;">V2.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Utilities\PC_Software\FlashUpdaterTool\flashUpdater.readme">readme</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Profile Central Tool</td>
+<td style="text-align: left;">V3.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Utilities\PC_Software\ProfileCentralTool\readme.txt">readme</a></td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li>On dual-core STM32 series this expansion software can be used on both cores but exclusively</li>
+</ul>
+<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.50.5 + STLink/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.31.0 + ST-LINK/V2</li>
+<li>STM32CubeIDE V1.4.1 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE devices and STM32F401RE-Nucleo board RevC</li>
+<li>STM32L053R8 devices and STM32L053R8-Nucleo board RevC</li>
+<li>STM32L476RG devices and STM32L476RG-Nucleo board RevC</li>
+<li>BlueNRG-M0 device and X-NUCLEO-IDB05A2 board <br>IMPORTANT: the X-CUBE-BLE1 software package also supports the BlueNRG-MS device and the X-NUCLEO-IDB05A1 expansion board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section24" aria-hidden="true"> <label for="collapse-section24" aria-hidden="true">V6.0.0 / 03-July-2020</label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<ul>
+<li>Align to STMicroelectronics.X-CUBE-BLE1.6.0.0.pack for STM32CubeMX (minimum required version V6.0.0)</li>
+<li>Update on STM32Cube HAL drivers</li>
+<li>New HCI file inclusion model</li>
+</ul>
+<h2 id="contents-1">Contents</h2>
+<table>
+<caption>Documentation<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Document</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">X-CUBE-BLE1 API Description</td>
+<td style="text-align: left;">V6.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Documentation\X-CUBE-BLE1.chm">CHM</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Getting Started with X-CUBE-BLE1 pack for STM32CubeMX</td>
+<td style="text-align: left;">V6.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Documentation\STMicroelectronics.X-CUBE-BLE1_GettingStarted.pdf">PDF</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BlueNRG-MS middleware for STM32Cube</td>
+<td style="text-align: left;">V6.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\BlueNRG-MS\doc\BlueNRG-MS_UserManual.chm">CHM</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Drivers<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F4xx CMSIS</td>
+<td style="text-align: left;">V2.6.5</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32F4xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F4xx HAL</td>
+<td style="text-align: left;">V1.7.8</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32F4xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32F4xx_Nucleo</td>
+<td style="text-align: left;">V1.2.7</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32F4xx-Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L0xx CMSIS</td>
+<td style="text-align: left;">V1.9.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32L0xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L0xx HAL</td>
+<td style="text-align: left;">V1.10.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32L0xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32L0xx_Nucleo</td>
+<td style="text-align: left;">V2.1.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32L0xx_Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L4xx CMSIS</td>
+<td style="text-align: left;">V1.7.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/Apache-2.0">Apache License v2.0</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32L4xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L4xx HAL</td>
+<td style="text-align: left;">V1.12.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32L4xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32L4xx_Nucleo</td>
+<td style="text-align: left;">V2.1.6</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32L4xx_Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP X-NUCLEO-IDB0xA1</td>
+<td style="text-align: left;">V3.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\X-NUCLEO-IDB0xA1\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Middlewares<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BlueNRG-MS</td>
+<td style="text-align: left;">V5.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\BlueNRG-MS\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LowPowerManager</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\LowPowerManager\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TimerServer</td>
+<td style="text-align: left;">V1.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\TimerServer\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Projects</td>
+<td style="text-align: left;">V5.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Projects\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Utilities</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Flash Updater Tool</td>
+<td style="text-align: left;">V2.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Utilities\PC_Software\FlashUpdaterTool\flashUpdater.readme">readme</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Profile Central Tool</td>
+<td style="text-align: left;">V3.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Utilities\PC_Software\ProfileCentralTool\readme.txt">readme</a></td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + STLink/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.29.0 + ST-LINK/V2</li>
+<li>STM32CubeIDE V1.3.1 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-1">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE devices and STM32F401RE-Nucleo board RevC</li>
+<li>STM32L053R8 devices and STM32L053R8-Nucleo board RevC</li>
+<li>STM32L476RG devices and STM32L476RG-Nucleo board RevC</li>
+<li>BlueNRG-M0 device and X-NUCLEO-IDB05A2 board <br>IMPORTANT: the X-CUBE-BLE1 software package also supports the BlueNRG-MS device and the X-NUCLEO-IDB05A1 expansion board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section23" aria-hidden="true"> <label for="collapse-section23" aria-hidden="true">V5.0.1 / 22-May-2020</label>
+<div>
+<h2 id="main-changes-2">Main Changes</h2>
+<ul>
+<li>Add support to X-NUCLEO-IDB05A2 expansion board<br> IMPORTANT: the X-CUBE-BLE1 software package also supports the X-NUCLEO-IDB05A1 expansion board</li>
+</ul>
+<h2 id="contents-2">Contents</h2>
+<table>
+<caption>Documentation<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Document</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">X-CUBE-BLE1 API Description</td>
+<td style="text-align: left;">V5.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Documentation\X-CUBE-BLE1.chm">CHM</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Getting Started with X-CUBE-BLE1 pack for STM32CubeMX</td>
+<td style="text-align: left;">V5.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Documentation\STMicroelectronics.X-CUBE-BLE1_GettingStarted.pdf">PDF</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BlueNRG-MS middleware for STM32Cube</td>
+<td style="text-align: left;">V5.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\BlueNRG-MS\doc\BlueNRG-MS_UserManual.chm">CHM</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Drivers<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F4xx CMSIS</td>
+<td style="text-align: left;">V2.6.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32F4xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F4xx HAL</td>
+<td style="text-align: left;">V1.7.7</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32F4xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32F4xx_Nucleo</td>
+<td style="text-align: left;">V1.2.7</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32F4xx-Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L0xx CMSIS</td>
+<td style="text-align: left;">V1.9.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32L0xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L0xx HAL</td>
+<td style="text-align: left;">V1.10.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32L0xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32L0xx_Nucleo</td>
+<td style="text-align: left;">V2.1.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32L0xx_Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L4xx CMSIS</td>
+<td style="text-align: left;">V1.6.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32L4xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L4xx HAL</td>
+<td style="text-align: left;">V1.11.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32L4xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32L4xx_Nucleo</td>
+<td style="text-align: left;">V2.1.6</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32L4xx_Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP X-NUCLEO-IDB0xA1</td>
+<td style="text-align: left;">V3.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\X-NUCLEO-IDB0xA1\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Middlewares<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BlueNRG-MS</td>
+<td style="text-align: left;">V4.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\BlueNRG-MS\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LowPowerManager</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\LowPowerManager\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TimerServer</td>
+<td style="text-align: left;">V1.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\TimerServer\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Projects</td>
+<td style="text-align: left;">V3.4.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Projects\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Utilities</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Flash Updater Tool</td>
+<td style="text-align: left;">V2.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Utilities\PC_Software\FlashUpdaterTool\flashUpdater.readme">readme</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Profile Central Tool</td>
+<td style="text-align: left;">V3.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Utilities\PC_Software\ProfileCentralTool\readme.txt">readme</a></td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + STLink/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27.1 + ST-LINK/V2</li>
+<li>STM32CubeIDE V1.2.1 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-2">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE devices and STM32F401RE-Nucleo board RevC</li>
+<li>STM32L053R8 devices and STM32L053R8-Nucleo board RevC</li>
+<li>STM32L476RG devices and STM32L476RG-Nucleo board RevC</li>
+<li>BlueNRG-M0 module and X-NUCLEO-IDB05A2 expansion board <br>IMPORTANT: the X-CUBE-BLE1 software package also supports the BlueNRG-MS device and the X-NUCLEO-IDB05A1 expansion board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section22" aria-hidden="true"> <label for="collapse-section22" aria-hidden="true">V5.0.0 / 07-February-2020</label>
+<div>
+<h2 id="main-changes-3">Main Changes</h2>
+<ul>
+<li>Align to STMicroelectronics.X-CUBE-BLE1.5.0.0.pack for STM32CubeMX (minimum required version V5.6.0)</li>
+<li>Update on STM32Cube HAL drivers</li>
+<li>Introduce support to STM32CubeIDE V1.2.1</li>
+<li>Remove support to SW4STM32</li>
+</ul>
+<h2 id="contents-3">Contents</h2>
+<table>
+<caption>Documentation<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Document</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">X-CUBE-BLE1 API Description</td>
+<td style="text-align: left;">V5.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Documentation\X-CUBE-BLE1.chm">CHM</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Getting Started with X-CUBE-BLE1 pack for STM32CubeMX</td>
+<td style="text-align: left;">V5.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Documentation\STMicroelectronics.X-CUBE-BLE1_GettingStarted.pdf">PDF</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BlueNRG-MS middleware for STM32Cube</td>
+<td style="text-align: left;">V5.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\BlueNRG-MS\doc\BlueNRG-MS_UserManual.chm">CHM</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Drivers<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F4xx CMSIS</td>
+<td style="text-align: left;">V2.6.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32F4xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F4xx HAL</td>
+<td style="text-align: left;">V1.7.7</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32F4xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32F4xx_Nucleo</td>
+<td style="text-align: left;">V1.2.7</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32F4xx-Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L0xx CMSIS</td>
+<td style="text-align: left;">V1.9.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32L0xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L0xx HAL</td>
+<td style="text-align: left;">V1.10.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32L0xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32L0xx_Nucleo</td>
+<td style="text-align: left;">V2.1.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32L0xx_Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L4xx CMSIS</td>
+<td style="text-align: left;">V1.6.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\CMSIS\Device\ST\STM32L4xx\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L4xx HAL</td>
+<td style="text-align: left;">V1.11.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\STM32L4xx_HAL_Driver\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32L4xx_Nucleo</td>
+<td style="text-align: left;">V2.1.6</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\STM32L4xx_Nucleo\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP X-NUCLEO-IDB0xA1</td>
+<td style="text-align: left;">V3.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Drivers\BSP\X-NUCLEO-IDB0xA1\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Middlewares<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BlueNRG-MS</td>
+<td style="text-align: left;">V4.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\BlueNRG-MS\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LowPowerManager</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\LowPowerManager\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TimerServer</td>
+<td style="text-align: left;">V1.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Middlewares\ST\TimerServer\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Projects<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Projects</td>
+<td style="text-align: left;">V3.4.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Projects\Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Utilities</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Flash Updater Tool</td>
+<td style="text-align: left;">V2.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Utilities\PC_Software\FlashUpdaterTool\flashUpdater.readme">readme</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Profile Central Tool</td>
+<td style="text-align: left;">V3.1.0</td>
+<td style="text-align: left;"><a href="https://www.st.com/content/st_com/en/search.html#q=SLA0077-t=resources-page=1">SLA0077</a></td>
+<td style="text-align: left;"><a href="Utilities\PC_Software\ProfileCentralTool\readme.txt">readme</a></td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + STLink/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27.1 + ST-LINK/V2</li>
+<li>STM32CubeIDE V1.2.1 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-3">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE devices and STM32F401RE-Nucleo board RevC</li>
+<li>STM32L053R8 devices and STM32L053R8-Nucleo board RevC</li>
+<li>STM32L476RG devices and STM32L476RG-Nucleo board RevC</li>
+<li>BlueNRG-MS device and X-NUCLEO-IDB05A1 board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section21" aria-hidden="true"> <label for="collapse-section21" aria-hidden="true">V4.4.0 / 15-April-2019</label>
+<div>
+<h2 id="main-changes-4">Main Changes</h2>
+<ul>
+<li>Align to STMicroelectronics.X-CUBE-BLE1.4.4.0.pack for STM32CubeMX (minimum required version V5.2.0)</li>
+<li>Update on STM32Cube HAL and Middleware driver</li>
+<li>Change HAL EXTI management in sample applications</li>
+</ul>
+<h2 id="contents-4">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.24.1</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.11.2</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.14.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>HCI Transport Layer and Transport Layer Interface documentation</li>
+<li>Getting started with the STMicroelectronics X-CUBE-BLE1 software package for STM32CubeMX</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB0xA1 V3.0.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>STM32 BlueNRG-MS Library</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+<li>Profile Central Java application</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.30.1 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.26.2 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V2.7.2 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-4">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section20" aria-hidden="true"> <label for="collapse-section20" aria-hidden="true">V4.3.0 / 18-February-2019</label>
+<div>
+<h2 id="main-changes-5">Main Changes</h2>
+<ul>
+<li>Align to STMicroelectronics.X-CUBE-BLE1.4.3.0.pack for STM32CubeMX (minimum required version V5.1.0)</li>
+<li>Update on STM32Cube HAL and Middleware driver</li>
+<li>Use USER BUTTON in EXTI mode in sample applications</li>
+</ul>
+<h2 id="contents-5">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.24.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.11.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.13.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>HCI Transport Layer and Transport Layer Interface documentation</li>
+<li>Getting started with the STMicroelectronics X-CUBE-BLE1 software package for STM32CubeMX</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB0xA1 V3.0.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>STM32 BlueNRG-MS Library</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+<li>Profile Central Java application</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.30.1 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.26.0 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V2.7.2 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-5">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section19" aria-hidden="true"> <label for="collapse-section19" aria-hidden="true">V4.2.0 / 19-November-2018</label>
+<div>
+<h2 id="main-changes-6">Main Changes</h2>
+<ul>
+<li>Align to STMicroelectronics.X-CUBE-BLE1.4.2.0.pack for STM32CubeMX (minimum required version V5.0.0)</li>
+<li>Add SensorDemo_BLESensor-App sample application</li>
+<li>Modify Flash Updater Tool for upgrading firmware on X-NUCLEO-IDB05A1 to v7.3</li>
+</ul>
+<h2 id="contents-6">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.21.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.10.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.11.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>HCI Transport Layer and Transport Layer Interface documentation</li>
+<li>Getting started with the STMicroelectronics X-CUBE-BLE1 software package for STM32CubeMX</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB0xA1 V3.0.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>STM32 BlueNRG-MS Library</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+<li>Profile Central Java application</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-6">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.20.1 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.24.2 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V2.6.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-6">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section18" aria-hidden="true"> <label for="collapse-section18" aria-hidden="true">V4.1.0 / 31-August-2018</label>
+<div>
+<h2 id="main-changes-7">Main Changes</h2>
+<ul>
+<li>Align to STMicroelectronics.X-CUBE-BLE1.1.1.0.pack for STM32CubeMX (minimum required version V4.27.0)</li>
+<li>Include BLE Profiles, Low Power and Throughput Test sample applications for Nucleo-L476RG</li>
+</ul>
+<h2 id="contents-7">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.21.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.10.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.11.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>HCI Transport Layer and Transport Layer Interface documentation</li>
+<li>Getting started with the STMicroelectronics X-CUBE-BLE1 software package for STM32CubeMX</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB0xA1 V3.0.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>STM32 BlueNRG-MS Library</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+<li>Profile Central Java application</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-7">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.24.2 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V2.4.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-7">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section17" aria-hidden="true"> <label for="collapse-section17" aria-hidden="true">V4.0.0 / 01-June-2018</label>
+<div>
+<h2 id="main-changes-8">Main Changes</h2>
+<ul>
+<li>Align to STMicroelectronics.BlueNRG-MS.1.0.0.pack for STM32CubeMX (minimum required version V4.26.0)</li>
+<li>Include application configuration files for STM32CubeMX</li>
+</ul>
+<h2 id="contents-8">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.21.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.10.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.11.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>HCI Transport Layer and Transport Layer Interface documentation</li>
+<li>Getting started with the STMicroelectronics BlueNRG-MS software package for STM32CubeMX</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB0xA1 V2.1.1</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>STM32 BlueNRG-MS Library</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-8">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.24.2 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V2.4.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-8">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section16" aria-hidden="true"> <label for="collapse-section16" aria-hidden="true">V3.3.0 / 16-April-2018</label>
+<div>
+<h2 id="main-changes-9">Main Changes</h2>
+<ul>
+<li>Include BLE Profiles source code</li>
+<li>Update on STM32Cube HAL and Middleware driver</li>
+</ul>
+<h2 id="contents-9">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.21.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.10.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.11.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB0xA1 V2.1.1</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG/BlueNRG-MS Library</li>
+<li>Timer Server</li>
+<li>BLE Profiles Central Library</li>
+<li>BLE Profiles Peripheral Library</li>
+<li>BLE ANCS Profile Library</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+<li>STM32 BLE Profiles app for Android devices<br> <strong>Note:</strong> STM BLE Profiles app for Android and iOS devices is available on both Google Play Store and Apple Store</li>
+<li>Profile Central Java application</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-9">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.24.2 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V2.4.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-9">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section15" aria-hidden="true"> <label for="collapse-section15" aria-hidden="true">V3.2.0 / 13-October-2017</label>
+<div>
+<h2 id="main-changes-10">Main Changes</h2>
+<ul>
+<li>Change SPI Baud Rate for STM32L476RG-Nucleo to 5.0 MBits/s</li>
+<li>Update on STM32Cube HAL and Middleware driver</li>
+</ul>
+<h2 id="contents-10">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.16.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.10.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.9.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB0xA1 V2.1.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG/BlueNRG-MS Library</li>
+<li>Timer Server</li>
+<li>BLE Profiles Central Library</li>
+<li>BLE Profiles Peripheral Library</li>
+<li>BLE ANCS Profile Library</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+<li>STM32 BLE Profiles app for Android devices<br> <strong>Note:</strong> STM BLE Profiles app for Android and iOS devices is available on both Google Play Store and Apple Store</li>
+<li>Profile Central Java application</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-10">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.22 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.14.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-10">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section14" aria-hidden="true"> <label for="collapse-section14" aria-hidden="true">V3.1.0 / 17-July-2017</label>
+<div>
+<h2 id="main-changes-11">Main Changes</h2>
+<ul>
+<li>Improve BLE Central Profiles Library</li>
+</ul>
+<h2 id="contents-11">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.15.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.8.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.7.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB0xA1 V2.1.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG/BlueNRG-MS Library</li>
+<li>Timer Server</li>
+<li>BLE Profiles Central Library</li>
+<li>BLE Profiles Peripheral Library</li>
+<li>BLE ANCS Profile Library</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+<li>STM32 BLE Profiles app for Android devices <br> <strong>Note:</strong> STM BLE Profiles app for Android and iOS devices is available on both Google Play Store and Apple Store</li>
+<li>Profile Central Java application</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-11">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.22 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.11.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-11">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section13" aria-hidden="true"> <label for="collapse-section13" aria-hidden="true">V3.0.0 / 10-February-2017</label>
+<div>
+<h2 id="main-changes-12">Main Changes</h2>
+<ul>
+<li>Update on STM32Cube HAL and Middleware driver</li>
+<li>Include BLE Profiles Peripheral application</li>
+<li>Include BLE Profiles Central application</li>
+<li>Include Apple Notification Center Service (ANCS) Profile application</li>
+</ul>
+<h2 id="contents-12">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.15.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.8.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.7.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB0xA1 V2.0.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG/BlueNRG-MS Library</li>
+<li>Timer Server</li>
+<li>BLE Profiles Central Library</li>
+<li>BLE Profiles Peripheral Library</li>
+<li>BLE ANCS Profile Library</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+<li>STM32 BLE Profiles app for Android devices <br> <strong>Note:</strong> STM BLE Profiles app for Android and iOS devices is available on both Google Play Store and Apple Store</li>
+<li>Profile Central Java application</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-12">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.50.3 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.22 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.11.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-12">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section12" aria-hidden="true"> <label for="collapse-section12" aria-hidden="true">V2.8.0 / 23-December-2016</label>
+<div>
+<h2 id="main-changes-13">Main Changes</h2>
+<ul>
+<li>Use BlueNRG/BlueNRG-MS HCI middleware from STSW-BLUENRG-DK 2.0.2</li>
+<li>Modify Flash Updater Tool for upgrading firmware on X-NUCLEO-IDB05A1 to v7.2c</li>
+</ul>
+<h2 id="contents-13">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.13.1</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.7.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.5.1</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB0xA1 V2.0.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG/BlueNRG-MS Library</li>
+<li>Timer Server</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-13">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.50.3 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.22 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.12.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-13">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section11" aria-hidden="true"> <label for="collapse-section11" aria-hidden="true">V2.7.0 / 22-July-2016</label>
+<div>
+<h2 id="main-changes-14">Main Changes</h2>
+<ul>
+<li>Add Eddystone Beacon sample application</li>
+<li>Use BlueNRG HCI middleware from STSW-BLUENRG-DK 2.0.1</li>
+<li>Modify Flash Updater Tool for upgrading firmware on X-NUCLEO-IDB05A1 to v7.2a</li>
+</ul>
+<h2 id="contents-14">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.12.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.5.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.3.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB04A1 V1.3.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG Library</li>
+<li>Timer Server</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-14">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.50.3 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.18a + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.8.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-14">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section10" aria-hidden="true"> <label for="collapse-section10" aria-hidden="true">V2.6.1 / 01-June-2016</label>
+<div>
+<h2 id="main-changes-15">Main Changes</h2>
+<ul>
+<li>Fix Virtual_COM_Port binary file for Nucleo-F401RE</li>
+</ul>
+<h2 id="contents-15">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.12.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.5.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.3.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB04A1 V1.2.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG Library</li>
+<li>Timer Server</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-15">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.50.3 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.18a + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.8.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-15">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section9" aria-hidden="true"> <label for="collapse-section9" aria-hidden="true">V2.6.0 / 20-May-2016</label>
+<div>
+<h2 id="main-changes-16">Main Changes</h2>
+<ul>
+<li>Update on STM32Cube HAL and Middleware driver</li>
+<li>Rename file clock.h to ble_clock.h</li>
+<li>Rename file list.h to ble_list.h</li>
+<li>Rename file list.c to ble_list.c</li>
+</ul>
+<h2 id="contents-16">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.12.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.5.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.3.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB04A1 V1.2.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG Library</li>
+<li>Timer Server</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-16">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.50.3 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.18a + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.8.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-16">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section8" aria-hidden="true"> <label for="collapse-section8" aria-hidden="true">V2.5.2 / 18-December-2015</label>
+<div>
+<h2 id="main-changes-17">Main Changes</h2>
+<ul>
+<li>Modify Flash Updater Tool for upgrading firmware on X-NUCLEO-IDB05A1 to v7.1e</li>
+</ul>
+<h2 id="contents-17">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.8.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.3.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.1.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB04A1 V1.1.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG Library</li>
+<li>Timer Server</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-17">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.40 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.14 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.4.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-17">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section7" aria-hidden="true"> <label for="collapse-section7" aria-hidden="true">V2.5.1 / 30-October-2015</label>
+<div>
+<h2 id="main-changes-18">Main Changes</h2>
+<ul>
+<li>Update on STM32Cube HAL and Middleware driver</li>
+</ul>
+<h2 id="contents-18">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers
+<ul>
+<li>STM32F4xx drivers aligned to STM32CubeF4 V1.8.0</li>
+<li>STM32L0xx drivers aligned to STM32CubeL0 V1.3.0</li>
+<li>STM32L4xx drivers aligned to STM32CubeL4 V1.1.0</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>BSP X-NUCLEO-IDB04A1 V1.1.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG Library</li>
+<li>Timer Server</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-18">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.40 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.14 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.4.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-18">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section6" aria-hidden="true"> <label for="collapse-section6" aria-hidden="true">V2.5.0 / 09-October-2015</label>
+<div>
+<h2 id="main-changes-19">Main Changes</h2>
+<ul>
+<li>Update on STM32Cube HAL and Middleware driver</li>
+<li>Use BlueNRG HCI middleware from STSW-BLUENRG-DK 1.8.0</li>
+<li>Introduce detection of BlueNRG expansion board (X-NUCLEO-IDB04A1 or X-NUCLEO-IDB05A1) at runtime</li>
+<li>Introduce support to NUCLEO-L476RG</li>
+<li>Add bandwidth test to SampleApp application</li>
+<li>Add DMA low power optimization to SensorDemo</li>
+<li>Add Java tool to update X-NUCLEO-IDB05A1 firmware</li>
+</ul>
+<h2 id="contents-19">Contents</h2>
+<ul>
+<li>STM32Cube HAL and Middlewares drivers STM32F4xx drivers aligned to STM32CubeF4 V1.8.0 STM32L0xx drivers aligned to STM32CubeL0 V1.1.0 STM32L4xx drivers aligned to STM32CubeL4 V1.1.0</li>
+<li>Documentation Doxygen documentation</li>
+<li>Drivers BSP X-NUCLEO-IDB04A1 V1.1.0</li>
+<li>Middlewares Low Power Manager STM32 BlueNRG Library Timer Server</li>
+<li>Utilities Flash Updater Tool</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-19">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.40 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.14 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.4.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-19">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE, STM32F411RE, STM32L053R8 and STM32L476RG devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>NUCLEO-L476RG Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5" aria-hidden="true">V2.4.0 / 27-May-2015</label>
+<div>
+<h2 id="main-changes-20">Main Changes</h2>
+<ul>
+<li>Update STM32F4xx HAL Drivers to v1.5.0</li>
+<li>Update BlueNRG HCI stack to DK v1.7.0</li>
+<li>Introduce support to BlueNRG-MS (X-NUCLEO-IDB05A1 expansion board)</li>
+<li>Introduce support to Ac6 System Workbench for STM32</li>
+</ul>
+<h2 id="contents-20">Contents</h2>
+<ul>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>Cortex-M CMSIS V4.2</li>
+<li>STM32F4xx CMSIS V2.3.0</li>
+<li>STM32L0xx CMSIS V1.1.0</li>
+<li>STM32F4xx HAL V1.3.0</li>
+<li>STM32L0xx HAL V1.1.0</li>
+<li>BSP STM32F4xx-NUCLEO V1.2.1</li>
+<li>BSP STM32L0xx_NUCLEO V1.0.0</li>
+<li>BSP X-NUCLEO-IDB04A1 V1.0.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG Library</li>
+<li>Timer Server</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-20">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.20 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.14 + ST-LINK/V2</li>
+<li>Ac6 System Workbench for STM32 V1.0.0 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-20">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE and STM32L053R8 devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-F411RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+<li>X-NUCLEO-IDB05A1 Board</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true">V2.3.0 / 06-March-2015</label>
+<div>
+<h2 id="main-changes-21">Main Changes</h2>
+<ul>
+<li>Add Timer Server in Middlewares</li>
+<li>Add sample application using, along with the DMA module, the STM32 Cube Low Level APIs for setting low power modes</li>
+<li>Add Java based graphical tool for updating the BlueNRG firmware on the X-NUCLEO-IDB04A1 board connected with an STM32 Nucleo board</li>
+</ul>
+<h2 id="contents-21">Contents</h2>
+<ul>
+<li>Documentation
+<ul>
+<li>Doxygen documentation</li>
+</ul></li>
+<li>Drivers
+<ul>
+<li>Cortex-M CMSIS V3.20</li>
+<li>STM32F4xx CMSIS V2.1.0</li>
+<li>STM32L0xx CMSIS V1.1.0</li>
+<li>STM32F4xx HAL V1.1.0</li>
+<li>STM32L0xx HAL V1.1.0</li>
+<li>BSP STM32F4xx-NUCLEO V1.0.0</li>
+<li>BSP STM32L0xx_NUCLEO V1.0.0</li>
+<li>BSP X-NUCLEO-IDB04A1 V1.0.0 (release notes)</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>Low Power Manager</li>
+<li>STM32 BlueNRG Library</li>
+<li>Timer Server</li>
+</ul></li>
+<li>Utilities
+<ul>
+<li>Flash Updater Tool</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-21">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.20 + ST-LINK/V2</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.10 + ST-LINK/V2</li>
+<li>Atollic TrueSTUDIO® for ARM® Pro V5.1.1 + ST-LINK/V2</li>
+</ul>
+<h2 id="supported-devices-and-boards-21">Supported Devices and Boards</h2>
+<ul>
+<li>STM32F401RE and STM32L053R8 devices</li>
+<li>NUCLEO-F401RE Board RevC</li>
+<li>NUCLEO-L053R8 Board RevC</li>
+<li>X-NUCLEO-IDB04A1 Board Rev1</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true">V2.2.0 / 05-December-2014</label>
+<div>
+<h2 id="main-changes-22">Main Changes</h2>
+<ul>
+<li>Add support to STM32F401RE-NUCLEO board</li>
+</ul>
+<h2 id="contents-22">Contents</h2>
+<ul>
+<li>Drivers
+<ul>
+<li>Cortex-M CMSIS V3.20</li>
+<li>STM32F4xx CMSIS V2.1.0</li>
+<li>STM32L0xx CMSIS V1.1.0</li>
+<li>STM32F4xx HAL V1.1.0</li>
+<li>STM32L0xx HAL V1.1.0</li>
+<li>BSP STM32F4xx-NUCLEO V1.0.0</li>
+<li>BSP STM32L0xx_NUCLEO V1.0.0</li>
+<li>BSP X-NUCLEO-IDB04A1 V1.0.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>STM32 BlueNRG Library</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true">V2.1.0 / 19-November-2014</label>
+<div>
+<h2 id="main-changes-23">Main Changes</h2>
+<ul>
+<li>Add Virtual COM sample application</li>
+</ul>
+<h2 id="contents-23">Contents</h2>
+<ul>
+<li>Drivers
+<ul>
+<li>Cortex-M CMSIS V3.20</li>
+<li>STM32L0xx CMSIS V1.1.0</li>
+<li>STM32L0xx HAL V1.1.0</li>
+<li>BSP STM32L0xx_NUCLEO V1.0.0</li>
+<li>BSP X-NUCLEO-IDB04A1 V1.0.0</li>
+</ul></li>
+<li>Middlewares
+<ul>
+<li>STM32 BlueNRG Library</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true">V1.0.0 / 10-September-2014</label>
+<h2 id="main-changes-24">Main Changes</h2>
+<ul>
+<li>First official release</li>
+</ul>
+</div>
+</section>
+</div>
+<footer class="sticky">
+<p>For complete documentation on <strong>X-CUBE-BLE1</strong>, visit: <a href="https://my.st.com/content/my_st_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32cube-expansion-packages/x-cube-BLE1.html">www.st.com</a></p>
+This release note uses up to date web standards and, for this reason, should not be opened with Internet Explorer but preferably with popular browsers such as Google Chrome, Mozilla Firefox, Opera or Microsoft Edge.
+</footer>
+</body>
+</html>
