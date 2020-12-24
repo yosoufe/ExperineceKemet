@@ -1,0 +1,3 @@
+[submodule "cubews/CMSIS_5"]
+	path = cubews/CMSIS_5
+	url = git@github.com:ARM-software/CMSIS_5.git
