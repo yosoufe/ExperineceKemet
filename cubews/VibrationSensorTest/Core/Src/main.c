@@ -80,7 +80,11 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
 uint16_t adc_buf[ADC_BUF_LENGTH];
+float32_t fft_in[ADC_BUF_LENGTH];
+float32_t fft_out[ADC_BUF_LENGTH];
+int freqs[ADC_BUF_LENGTH/2];
 arm_rfft_fast_instance_f32 fft_handler;
+char is_data_ready_for_fft = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -97,7 +101,28 @@ static void MX_ADC1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+// help from
+// https://github.com/YetAnotherElectronicsChannel/STM32_FFT_Spectrum_Analysis/blob/master/code%20STM32/Src/main.c
+float complexABS(float real, float compl) {
+  return sqrtf(real*real+compl*compl);
+}
 
+void calculate_fft()
+{
+  // copy adc buffer to fft buffer
+  for (size_t i = 0; i < ADC_BUF_LENGTH ; i++)
+  {
+    fft_in[i] = (float32_t)adc_buf[i];
+  }
+  // calculate the fft
+  arm_rfft_fast_f32(&fft_handler, fft_in, fft_out, 0);
+
+  // mix the real and imaginary values of the fft output
+  for (size_t i = 0; i < ADC_BUF_LENGTH/2 ; i+=1)
+  {
+    freqs[i] = (int)(20*log10f(complexABS(fft_out[2*i], fft_out[2*i+1])));
+  }
+}
 /* USER CODE END 0 */
 
 /**
@@ -134,14 +159,25 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
+  // initialize the fft
+  arm_status fft_init_status = arm_rfft_fast_init_f32 (&fft_handler, ADC_BUF_LENGTH);
+  if ( fft_init_status != ARM_MATH_SUCCESS )
+  {
+    Error_Handler();
+  }
+  // start the ADC conversion and also using DMA
   HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, ADC_BUF_LENGTH);
-  arm_rfft_fast_init_f32 (&fft_handler, ADC_BUF_LENGTH);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    if (is_data_ready_for_fft == 1)
+    {
+      calculate_fft();
+      is_data_ready_for_fft = 0;
+    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -510,8 +546,6 @@ static void MX_GPIO_Init(void)
   */
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
 {
-  /* Invalidate Data Cache to get the updated content of the SRAM on the first half of the ADC converted data buffer: 32 bytes */
-  SCB_InvalidateDCache_by_Addr((uint32_t *) &adc_buf[0], ADC_BUF_LENGTH);
 }
 
 /**
@@ -521,8 +555,7 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-   /* Invalidate Data Cache to get the updated content of the SRAM on the second half of the ADC converted data buffer: 32 bytes */
-  SCB_InvalidateDCache_by_Addr((uint32_t *) &adc_buf[ADC_BUF_LENGTH/2], ADC_BUF_LENGTH);
+  is_data_ready_for_fft = 1;
 }
 
 /* USER CODE END 4 */
