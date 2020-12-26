@@ -112,11 +112,6 @@ float complexABS(float real, float compl) {
 
 void calculate_fft()
 {
-  // copy adc buffer to fft buffer
-  for (size_t i = 0; i < ADC_BUF_LENGTH ; i++)
-  {
-    fft_in[i] = (float32_t)adc_buf[i] * 3.3 / 65535;
-  }
   // calculate the fft
   arm_rfft_fast_f32(&fft_handler, fft_in, fft_out, 0);
 
@@ -201,6 +196,20 @@ int main(void)
   {
     if (is_data_ready_for_fft == 1)
     {
+      // copy half of adc buffer to fft buffer
+      for (size_t i = 0; i < ADC_BUF_LENGTH/2 ; i++)
+      {
+        fft_in[i] = (float32_t)adc_buf[i] * 3.3 / 65535 - (3.3/2.0);
+      }
+      is_data_ready_for_fft = 0;
+    }
+    else if (is_data_ready_for_fft == 2)
+    {
+      // copy the other half of adc buffer to fft buffer
+      for (size_t i = ADC_BUF_LENGTH/2; i < ADC_BUF_LENGTH; i++)
+      {
+        fft_in[i] = (float32_t)adc_buf[i] * 3.3 / 65535 - (3.3/2.0);
+      }
       calculate_fft();
       is_data_ready_for_fft = 0;
     }
@@ -617,6 +626,12 @@ static void MX_GPIO_Init(void)
   */
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
 {
+  // copy to fft_in buffer of fft calculation is not finished yet?
+  if (is_data_ready_for_fft != 0)
+  {
+    Error_Handler();
+  }
+  is_data_ready_for_fft = 1;
 }
 
 /**
@@ -626,12 +641,12 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-  // fft is not finished yet?
-  if (is_data_ready_for_fft == 1)
+  // copy to fft_in buffer is not finished yet?
+  if (is_data_ready_for_fft != 0)
   {
     Error_Handler();
   }
-  is_data_ready_for_fft = 1;
+  is_data_ready_for_fft = 2;
 }
 
 /* USER CODE END 4 */
