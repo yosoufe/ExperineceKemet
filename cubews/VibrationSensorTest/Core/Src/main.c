@@ -74,6 +74,8 @@ DMA_HandleTypeDef hdma_adc1;
 
 ETH_HandleTypeDef heth;
 
+TIM_HandleTypeDef htim3;
+
 UART_HandleTypeDef huart3;
 
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
@@ -95,6 +97,7 @@ static void MX_ETH_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -112,7 +115,7 @@ void calculate_fft()
   // copy adc buffer to fft buffer
   for (size_t i = 0; i < ADC_BUF_LENGTH ; i++)
   {
-    fft_in[i] = (float32_t)adc_buf[i];
+    fft_in[i] = (float32_t)adc_buf[i] * 3.3 / 65535;
   }
   // calculate the fft
   arm_rfft_fast_f32(&fft_handler, fft_in, fft_out, 0);
@@ -158,6 +161,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_ADC1_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   // initialize the fft
   arm_status fft_init_status = arm_rfft_fast_init_f32 (&fft_handler, ADC_BUF_LENGTH);
@@ -165,8 +169,30 @@ int main(void)
   {
     Error_Handler();
   }
-  // start the ADC conversion and also using DMA
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, ADC_BUF_LENGTH);
+
+  /* Run the ADC calibration in single-ended mode */
+  if (HAL_ADCEx_Calibration_Start(&hadc1, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED) != HAL_OK)
+	{
+	  /* Calibration Error */
+	  Error_Handler();
+	}
+
+  /* Start ADC conversion on regular group with transfer by DMA */
+  if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, ADC_BUF_LENGTH) != HAL_OK)
+  {
+    /* Start Error */
+    Error_Handler();
+  }
+
+  /* Timer enable */
+  if (HAL_TIM_Base_Start(&htim3) != HAL_OK)
+  {
+    /* Counter Enable Error */
+    Error_Handler();
+  }
+
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -290,11 +316,11 @@ static void MX_ADC1_Init(void)
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   hadc1.Init.LowPowerAutoWait = DISABLE;
-  hadc1.Init.ContinuousConvMode = ENABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
   hadc1.Init.NbrOfConversion = 1;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIG_T3_TRGO;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
   hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DMA_CIRCULAR;
   hadc1.Init.Overrun = ADC_OVR_DATA_OVERWRITTEN;
   hadc1.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
@@ -372,6 +398,51 @@ static void MX_ETH_Init(void)
   /* USER CODE BEGIN ETH_Init 2 */
 
   /* USER CODE END ETH_Init 2 */
+
+}
+
+/**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 240-1;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 100-1;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_ENABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
 
 }
 
@@ -555,6 +626,11 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
+  // fft is not finished yet?
+  if (is_data_ready_for_fft == 1)
+  {
+    Error_Handler();
+  }
   is_data_ready_for_fft = 1;
 }
 
@@ -571,6 +647,9 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+    /* Toggle LED3 */
+    HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+    HAL_Delay(500);
   }
   /* USER CODE END Error_Handler_Debug */
 }
