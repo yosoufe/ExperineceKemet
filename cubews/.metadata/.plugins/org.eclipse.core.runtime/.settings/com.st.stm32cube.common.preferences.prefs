@@ -1,0 +1,6 @@
+DeviceConfigurationTool.AskToDoCodeGenerationOnIocSave=false
+DeviceConfigurationTool.AskToDoSaveAllOnCodeGeneration=false
+DeviceConfigurationTool.AskToSwitchToCPerspectiveOnCodeGeneration=false
+DeviceConfigurationTool.AskToSwitchToCdtPerspective=false
+DeviceConfigurationTool.AskToSwitchToCubeMxPerspective=false
+eclipse.preferences.version=1

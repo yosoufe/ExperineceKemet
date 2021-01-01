@@ -1,0 +1,6 @@
+adc_buf
+freqs
+fft_out
+fft_out[80]
+fft_out[81]
+fft_out[80]*fft_out[80] +fft_out[81]*fft_out[81]

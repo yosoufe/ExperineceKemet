@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="is_data_ready_for_fft"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="is_data_ready_for_fft"/>
+			<item value="freqs"/>
+			<item value="calculate"/>
+			<item value="HAL_ADC_ConvCpltCallback"/>
+			<item value="AdcHandle"/>
+			<item value="HAL_ADC_Start_DMA"/>
+			<item value="HAL_ADCEx_Calibration_Start"/>
+			<item value="ADC_CLOCK_ASYNC_DIV2"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+</section>
