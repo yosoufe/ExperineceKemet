@@ -35,7 +35,7 @@ extern "C" {
 /*---------- Print messages from BLE1 files at user level -----------*/
 #define BLE1_DEBUG      1
 /*---------- Print the data travelling over the SPI in the .csv format compatible with the ST BlueNRG GUI -----------*/
-#define PRINT_CSV_FORMAT      1
+#define PRINT_CSV_FORMAT      0
 /*---------- Number of Bytes reserved for HCI Read Packet -----------*/
 #define HCI_READ_PACKET_SIZE      128
 /*---------- Number of Bytes reserved for HCI Max Payload -----------*/

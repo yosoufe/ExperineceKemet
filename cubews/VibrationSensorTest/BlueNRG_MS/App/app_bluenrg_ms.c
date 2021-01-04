@@ -207,6 +207,14 @@ void MX_BlueNRG_MS_Init(void)
      while(1);
   }
 
+  ret = Add_Switch_Service();
+  if(ret == BLE_STATUS_SUCCESS) {
+     PRINTF("BlueMS SW service added successfully.\n");
+  } else {
+     PRINTF("Error while adding BlueMS HW service: 0x%02x\r\n", ret);
+     while(1);
+  }
+
   /* Set output power level */
   ret = aci_hal_set_tx_power_level(1,4);
 
@@ -300,7 +308,7 @@ static void User_Process(void)
         Reset_Motion_Values();
       }
 #if !USE_BUTTON
-      HAL_Delay(1000); /* wait 1 sec before sending new data */
+      HAL_Delay(100); /* wait 1 sec before sending new data */
 #endif
     }
 #if USE_BUTTON

@@ -46,9 +46,18 @@ do {\
 /* Software Characteristics Service */
 #define COPY_SW_SENS_W2ST_SERVICE_UUID(uuid_struct)    COPY_UUID_128(uuid_struct,0x00,0x00,0x00,0x00,0x00,0x02,0x11,0xe1,0x9a,0xb4,0x00,0x02,0xa5,0xd5,0xc5,0x1b)
 #define COPY_QUATERNIONS_W2ST_CHAR_UUID(uuid_struct)   COPY_UUID_128(uuid_struct,0x00,0x00,0x01,0x00,0x00,0x01,0x11,0xe1,0xac,0x36,0x00,0x02,0xa5,0xd5,0xc5,0x1b)
+/* Switch Characteristics Service */
+#define COPY_SWITCH_SERVICE_UUID(uuid_struct)          COPY_UUID_128(uuid_struct,0x20,0x00,0x00,0x00,0x00,0x02,0x11,0xe1,0x9a,0xb4,0x00,0x02,0xa5,0xd5,0xc5,0x1b)
+#define COPY_SWITCH_CHAR_UUID(uuid_struct)             COPY_UUID_128(uuid_struct,0x20,0x00,0x00,0x00,0x00,0x01,0x11,0xe1,0xac,0x36,0x00,0x02,0xa5,0xd5,0xc5,0x1b)
+
+
 
 uint16_t HWServW2STHandle, EnvironmentalCharHandle, AccGyroMagCharHandle;
 uint16_t SWServW2STHandle, QuaternionsCharHandle;
+uint16_t SwitchServHandle, SwitchCharHandle;
+
+
+__IO uint8_t SWITCH_STATUS = 0x12;
 
 /* UUIDS */
 Service_UUID_t service_uuid;
@@ -106,6 +115,39 @@ tBleStatus Add_HWServW2ST_Service(void)
     return BLE_STATUS_ERROR;
 
   return BLE_STATUS_SUCCESS;
+}
+
+tBleStatus Add_Switch_Service(void)
+{
+  tBleStatus ret;
+  uint8_t uuid[16];
+
+  COPY_SWITCH_SERVICE_UUID(uuid);
+  BLUENRG_memcpy(&service_uuid.Service_UUID_128, uuid, 16);
+  ret = aci_gatt_add_serv(UUID_TYPE_128, service_uuid.Service_UUID_128, PRIMARY_SERVICE,
+                          2+1, &SwitchServHandle);
+
+  if (ret != BLE_STATUS_SUCCESS) {
+    goto fail;
+  }
+
+  COPY_SWITCH_CHAR_UUID(uuid);
+  BLUENRG_memcpy(&char_uuid.Char_UUID_128, uuid, 16);
+  ret =  aci_gatt_add_char(SwitchServHandle, UUID_TYPE_128, char_uuid.Char_UUID_128,
+                           2,
+			   CHAR_PROP_WRITE_WITHOUT_RESP | CHAR_PROP_READ,
+                           ATTR_PERMISSION_NONE,
+                           GATT_NOTIFY_READ_REQ_AND_WAIT_FOR_APPL_RESP | GATT_NOTIFY_ATTRIBUTE_WRITE,
+                           16, 0, &SwitchCharHandle);
+
+  if (ret != BLE_STATUS_SUCCESS) {
+    goto fail;
+  }
+
+  return BLE_STATUS_SUCCESS;
+
+fail:
+  return BLE_STATUS_ERROR;
 }
 
 /**
@@ -252,6 +294,10 @@ void Read_Request_CB(uint16_t handle)
     data_p = 1000.0 + ((uint64_t)rand()*100)/RAND_MAX; //P sensor emulation
     BlueMS_Environmental_Update((int32_t)(data_p *100), (int16_t)(data_t * 10));
   }
+  else if (handle == SwitchCharHandle + 1)
+  {
+    BlueMS_Switch_Update(SWITCH_STATUS);
+  }
 
   if(connection_handle !=0)
   {
@@ -260,6 +306,26 @@ void Read_Request_CB(uint16_t handle)
     {
       PRINTF("aci_gatt_allow_read() failed: 0x%02x\r\n", ret);
     }
+  }
+}
+
+void Write_Request_CB(uint16_t handle, uint8_t* data)
+{
+//  tBleStatus ret;
+  if(handle == SwitchCharHandle +1 )
+  {
+    SWITCH_STATUS = data[0];
+
+//    ret = aci_gatt_write_response(connection_handle,
+//				  handle + 1,
+//				  0x00,
+//				  0x00,
+//				  2,
+//				  data);
+//    if (ret != BLE_STATUS_SUCCESS)
+//    {
+//      PRINTF("aci_gatt_write_response() failed: 0x%02x\r\n", ret);
+//    }
   }
 }
 
@@ -277,6 +343,24 @@ tBleStatus BlueMS_Environmental_Update(int32_t press, int16_t temp)
 
   if (ret != BLE_STATUS_SUCCESS){
     PRINTF("Error while updating TEMP characteristic: 0x%04X\n",ret) ;
+    return BLE_STATUS_ERROR ;
+  }
+
+  return BLE_STATUS_SUCCESS;
+}
+
+tBleStatus BlueMS_Switch_Update(uint8_t switch_status)
+{
+  tBleStatus ret;
+  uint8_t buff[2];
+  buff[0] = switch_status;
+  buff[1] = 0;
+
+  ret = aci_gatt_update_char_value(SwitchServHandle, SwitchCharHandle,
+                                   0, 2, buff);
+
+  if (ret != BLE_STATUS_SUCCESS){
+    PRINTF("Error while updating Switch characteristic: 0x%04X\n",ret) ;
     return BLE_STATUS_ERROR ;
   }
 

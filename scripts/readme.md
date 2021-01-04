@@ -10,7 +10,6 @@ sudo apt-get install libbluetooth-dev \
     libglib2.0-dev \
     python-dev 
 
-python3 -m pip install gattlib 
-# or 
-python3 -m pip install bluepy
+python3 -m pip install -U gattlib bluepy # two different BLE lib
+python3 -m pip install -U futures blue-st-sdk
 ```

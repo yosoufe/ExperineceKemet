@@ -72,7 +72,7 @@ void Set_DeviceConnectable(void)
     8,0x09,SENSOR_DEMO_NAME,  // Complete Name
     13,0xFF,0x01, /* SKD version */
     0x02,
-    0x00,
+    0x20, /* Switch */
     0xF4, /* ACC+Gyro+Mag 0xE0 | 0x04 Temp | 0x10 Pressure */
     0x00, /*  */
     0x00, /*  */
@@ -155,8 +155,13 @@ void user_notify(void * pData)
           Read_Request_CB(pr->attr_handle);
         }
         break;
+      case EVT_BLUE_GATT_ATTRIBUTE_MODIFIED:
+      {
+	evt_gatt_attr_modified_IDB05A1 *pr = (void*)blue_evt->data;
+	Write_Request_CB(pr->attr_handle, pr->att_data);
       }
-
+      break;
+      }
     }
     break;
   }
