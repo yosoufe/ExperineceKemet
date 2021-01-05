@@ -48,6 +48,7 @@ AxesRaw_t x_axes = {0, 0, 0};
 AxesRaw_t g_axes = {0, 0, 0};
 AxesRaw_t m_axes = {0, 0, 0};
 AxesRaw_t q_axes[SEND_N_QUATERNIONS] = {{0, 0, 0}};
+uint16_t SWITCH_STATUS = 0x0000;
 
 /* Private function prototypes -----------------------------------------------*/
 void GAP_DisconnectionComplete_CB(void);

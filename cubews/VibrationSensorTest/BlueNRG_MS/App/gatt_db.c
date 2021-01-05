@@ -47,7 +47,7 @@ do {\
 #define COPY_SW_SENS_W2ST_SERVICE_UUID(uuid_struct)    COPY_UUID_128(uuid_struct,0x00,0x00,0x00,0x00,0x00,0x02,0x11,0xe1,0x9a,0xb4,0x00,0x02,0xa5,0xd5,0xc5,0x1b)
 #define COPY_QUATERNIONS_W2ST_CHAR_UUID(uuid_struct)   COPY_UUID_128(uuid_struct,0x00,0x00,0x01,0x00,0x00,0x01,0x11,0xe1,0xac,0x36,0x00,0x02,0xa5,0xd5,0xc5,0x1b)
 /* Switch Characteristics Service */
-#define COPY_SWITCH_SERVICE_UUID(uuid_struct)          COPY_UUID_128(uuid_struct,0x20,0x00,0x00,0x00,0x00,0x02,0x11,0xe1,0x9a,0xb4,0x00,0x02,0xa5,0xd5,0xc5,0x1b)
+#define COPY_SWITCH_SERVICE_UUID(uuid_struct)          COPY_UUID_128(uuid_struct,0x00,0x00,0x00,0x00,0x00,0x03,0x11,0xe1,0x9a,0xb4,0x00,0x02,0xa5,0xd5,0xc5,0x1b)
 #define COPY_SWITCH_CHAR_UUID(uuid_struct)             COPY_UUID_128(uuid_struct,0x20,0x00,0x00,0x00,0x00,0x01,0x11,0xe1,0xac,0x36,0x00,0x02,0xa5,0xd5,0xc5,0x1b)
 
 
@@ -57,7 +57,7 @@ uint16_t SWServW2STHandle, QuaternionsCharHandle;
 uint16_t SwitchServHandle, SwitchCharHandle;
 
 
-__IO uint8_t SWITCH_STATUS = 0x12;
+extern uint16_t SWITCH_STATUS;
 
 /* UUIDS */
 Service_UUID_t service_uuid;
@@ -125,7 +125,7 @@ tBleStatus Add_Switch_Service(void)
   COPY_SWITCH_SERVICE_UUID(uuid);
   BLUENRG_memcpy(&service_uuid.Service_UUID_128, uuid, 16);
   ret = aci_gatt_add_serv(UUID_TYPE_128, service_uuid.Service_UUID_128, PRIMARY_SERVICE,
-                          2+1, &SwitchServHandle);
+                          1+3, &SwitchServHandle);
 
   if (ret != BLE_STATUS_SUCCESS) {
     goto fail;
@@ -134,10 +134,10 @@ tBleStatus Add_Switch_Service(void)
   COPY_SWITCH_CHAR_UUID(uuid);
   BLUENRG_memcpy(&char_uuid.Char_UUID_128, uuid, 16);
   ret =  aci_gatt_add_char(SwitchServHandle, UUID_TYPE_128, char_uuid.Char_UUID_128,
-                           2,
-			   CHAR_PROP_WRITE_WITHOUT_RESP | CHAR_PROP_READ,
+                           4,
+			   CHAR_PROP_WRITE_WITHOUT_RESP | CHAR_PROP_READ | CHAR_PROP_NOTIFY,
                            ATTR_PERMISSION_NONE,
-                           GATT_NOTIFY_READ_REQ_AND_WAIT_FOR_APPL_RESP | GATT_NOTIFY_ATTRIBUTE_WRITE,
+                           GATT_NOTIFY_ATTRIBUTE_WRITE,
                            16, 0, &SwitchCharHandle);
 
   if (ret != BLE_STATUS_SUCCESS) {
@@ -314,18 +314,8 @@ void Write_Request_CB(uint16_t handle, uint8_t* data)
 //  tBleStatus ret;
   if(handle == SwitchCharHandle +1 )
   {
-    SWITCH_STATUS = data[0];
-
-//    ret = aci_gatt_write_response(connection_handle,
-//				  handle + 1,
-//				  0x00,
-//				  0x00,
-//				  2,
-//				  data);
-//    if (ret != BLE_STATUS_SUCCESS)
-//    {
-//      PRINTF("aci_gatt_write_response() failed: 0x%02x\r\n", ret);
-//    }
+    SWITCH_STATUS = (uint16_t)(data[2]) << 8 |
+	(uint16_t)(data[3]);
   }
 }
 
@@ -349,12 +339,12 @@ tBleStatus BlueMS_Environmental_Update(int32_t press, int16_t temp)
   return BLE_STATUS_SUCCESS;
 }
 
-tBleStatus BlueMS_Switch_Update(uint8_t switch_status)
+tBleStatus BlueMS_Switch_Update(uint16_t switch_status)
 {
   tBleStatus ret;
   uint8_t buff[2];
-  buff[0] = switch_status;
-  buff[1] = 0;
+  HOST_TO_LE_16(buff,(HAL_GetTick()>>3));
+  HOST_TO_LE_16(buff+2,switch_status);
 
   ret = aci_gatt_update_char_value(SwitchServHandle, SwitchCharHandle,
                                    0, 2, buff);
