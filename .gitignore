@@ -1,6 +1,7 @@
 # STCubeIDE
 *.metadata
 **/Debug
+*/.ipynb_checkpoints
 
 # Prerequisites
 *.d
