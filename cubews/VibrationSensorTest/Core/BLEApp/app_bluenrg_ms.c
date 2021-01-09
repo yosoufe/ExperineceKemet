@@ -99,13 +99,6 @@ void print_csv_time(void){
 
 void MX_BlueNRG_MS_Init(void)
 {
-  /* USER CODE BEGIN SV */
-
-  /* USER CODE END SV */
-
-  /* USER CODE BEGIN BlueNRG_MS_Init_PreTreatment */
-
-  /* USER CODE END BlueNRG_MS_Init_PreTreatment */
 
   /* Initialize the peripherals and the BLE Stack */
   const char *name = "BlueNRG";
@@ -236,10 +229,6 @@ void MX_BlueNRG_MS_Init(void)
 
   /* Set output power level */
   ret = aci_hal_set_tx_power_level(1,4);
-
-  /* USER CODE BEGIN BlueNRG_MS_Init_PostTreatment */
-
-  /* USER CODE END BlueNRG_MS_Init_PostTreatment */
 }
 
 /*
@@ -247,16 +236,8 @@ void MX_BlueNRG_MS_Init(void)
  */
 void MX_BlueNRG_MS_Process(void)
 {
-  /* USER CODE BEGIN BlueNRG_MS_Process_PreTreatment */
-
-  /* USER CODE END BlueNRG_MS_Process_PreTreatment */
-
   User_Process();
   hci_user_evt_proc();
-
-  /* USER CODE BEGIN BlueNRG_MS_Process_PostTreatment */
-
-  /* USER CODE END BlueNRG_MS_Process_PostTreatment */
 }
 
 /**

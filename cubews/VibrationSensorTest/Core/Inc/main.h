@@ -31,10 +31,9 @@ extern "C" {
 #include "stm32h7xx_hal.h"
 
 #include "hci_tl_interface.h"
-#include "stm32h7xx_nucleo.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stm32h7xx_nucleo.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -60,7 +59,6 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define BSP_BUTTON_EXTI_IRQn EXTI15_10_IRQn
 #define LD1_Pin GPIO_PIN_0
 #define LD1_GPIO_Port GPIOB
 #define LD3_Pin GPIO_PIN_14
@@ -73,6 +71,8 @@ void Error_Handler(void);
 #define USB_OTG_FS_PWR_EN_GPIO_Port GPIOD
 #define USB_OTG_FS_OVCR_Pin GPIO_PIN_7
 #define USB_OTG_FS_OVCR_GPIO_Port GPIOG
+#define LD2_Pin GPIO_PIN_1
+#define LD2_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

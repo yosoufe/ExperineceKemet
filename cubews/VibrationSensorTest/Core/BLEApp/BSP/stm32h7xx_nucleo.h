@@ -248,8 +248,6 @@ typedef struct
 #define COM1_UART                        USART3
 
 #define COM_POLL_TIMEOUT                 1000
-extern UART_HandleTypeDef hcom_uart[COMn];
-#define  huart3 hcom_uart[COM1]
 
 /**
  * @}
