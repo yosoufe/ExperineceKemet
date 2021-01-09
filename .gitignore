@@ -2,6 +2,7 @@
 *.metadata
 **/Debug
 */.ipynb_checkpoints
+*/BLE_EXAMPLES
 
 # Prerequisites
 *.d
