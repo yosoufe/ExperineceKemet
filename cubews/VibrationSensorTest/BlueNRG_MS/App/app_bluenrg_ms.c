@@ -123,6 +123,25 @@ void MX_BlueNRG_MS_Init(void)
 
   hci_init(user_notify, NULL);
 
+  uint8_t val[] = {0x00};
+  ret = aci_hal_write_config_data(CONFIG_DATA_LL_WITHOUT_HOST,
+				  CONFIG_DATA_LL_WITHOUT_HOST_LEN  ,
+				  val);
+  if (ret) {
+    printf("Setting CONFIG_DATA_LL_WITHOUT_HOST failed 0x%02x.\n", ret);
+  }
+
+
+  uint8_t readVal[16];
+  uint8_t readLen;
+  ret = aci_hal_read_config_data(CONFIG_DATA_LL_WITHOUT_HOST,
+  			    CONFIG_DATA_LL_WITHOUT_HOST_LEN,
+			    &readLen,
+			    readVal);
+  if (ret) {
+    printf("aci_hal_read_config_data failed 0x%02x.\n", ret);
+  }
+
   /* get the BlueNRG HW and FW versions */
   getBlueNRGVersion(&hwVersion, &fwVersion);
 

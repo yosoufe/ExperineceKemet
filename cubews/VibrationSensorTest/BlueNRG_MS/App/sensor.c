@@ -24,6 +24,7 @@
 #include "hci_const.h"
 #include "bluenrg_aci_const.h"
 #include "bluenrg_gatt_aci.h"
+#include "bluenrg_l2cap_aci.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -77,12 +78,12 @@ void Set_DeviceConnectable(void)
     0xF4, /* ACC+Gyro+Mag 0xE0 | 0x04 Temp | 0x10 Pressure */
     0x00, /*  */
     0x00, /*  */
-    bdaddr[5], /* BLE MAC start -MSB first- */
-    bdaddr[4],
-    bdaddr[3],
-    bdaddr[2],
-    bdaddr[1],
-    bdaddr[0]  /* BLE MAC stop */
+    0x7B, //bdaddr[5], /* BLE MAC start -MSB first- */
+    0x25, //bdaddr[4],
+    0xC2, //bdaddr[3],
+    0x57, //bdaddr[2],
+    0xC9, //bdaddr[1],
+    0xD9  //bdaddr[0]  /* BLE MAC stop */
   };
 
   manuf_data[18] |= 0x01; /* Sensor Fusion */
@@ -157,11 +158,26 @@ void user_notify(void * pData)
         }
         break;
       case EVT_BLUE_GATT_ATTRIBUTE_MODIFIED:
-      {
-	evt_gatt_attr_modified_IDB05A1 *pr = (void*)blue_evt->data;
-	Write_Request_CB(pr->attr_handle, pr->att_data);
-      }
-      break;
+	{
+	  evt_gatt_attr_modified_IDB05A1 *pr = (void*)blue_evt->data;
+	  Write_Request_CB(pr->attr_handle, pr->att_data);
+	}
+	break;
+      case EVT_BLUE_L2CAP_CONN_UPD_REQ:
+        {
+          PRINTF("EVT_BLUE_L2CAP_CONN_UPD_REQ\n");
+	}
+	break;
+      case EVT_BLUE_L2CAP_PROCEDURE_TIMEOUT:
+	{
+	  PRINTF("EVT_BLUE_L2CAP_PROCEDURE_TIMEOUT\n");
+      	}
+      	break;
+      case EVT_BLUE_L2CAP_CONN_UPD_RESP:
+	{
+	  PRINTF("EVT_BLUE_L2CAP_CONN_UPD_RESP\n");
+	}
+	break;
       }
     }
     break;

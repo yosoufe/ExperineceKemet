@@ -134,7 +134,7 @@ tBleStatus Add_Switch_Service(void)
   COPY_SWITCH_CHAR_UUID(uuid);
   BLUENRG_memcpy(&char_uuid.Char_UUID_128, uuid, 16);
   ret =  aci_gatt_add_char(SwitchServHandle, UUID_TYPE_128, char_uuid.Char_UUID_128,
-                           4,
+                           250,
 			   CHAR_PROP_WRITE_WITHOUT_RESP | CHAR_PROP_READ | CHAR_PROP_NOTIFY,
                            ATTR_PERMISSION_NONE,
                            GATT_NOTIFY_ATTRIBUTE_WRITE,
@@ -342,12 +342,15 @@ tBleStatus BlueMS_Environmental_Update(int32_t press, int16_t temp)
 tBleStatus BlueMS_Switch_Update(uint16_t switch_status)
 {
   tBleStatus ret;
-  uint8_t buff[2];
+  uint8_t buff[500];
   HOST_TO_LE_16(buff,(HAL_GetTick()>>3));
   HOST_TO_LE_16(buff+2,switch_status);
+  HOST_TO_LE_16(buff+4, 0xAAAA);
 
+//  ret = aci_gatt_update_char_value(SwitchServHandle, SwitchCharHandle,
+//                                   0, 2, buff);
   ret = aci_gatt_update_char_value(SwitchServHandle, SwitchCharHandle,
-                                   0, 2, buff);
+                                     0, 2, buff);
 
   if (ret != BLE_STATUS_SUCCESS){
     PRINTF("Error while updating Switch characteristic: 0x%04X\n",ret) ;
