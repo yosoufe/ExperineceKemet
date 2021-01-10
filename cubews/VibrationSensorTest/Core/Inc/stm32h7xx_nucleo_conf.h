@@ -32,7 +32,7 @@
   * @{
   */
 /* COM Feature define */
-#define USE_BSP_COM_FEATURE                 1U
+#define USE_BSP_COM_FEATURE                 0U
 
 /* COM define */
 #define USE_COM_LOG                         1U

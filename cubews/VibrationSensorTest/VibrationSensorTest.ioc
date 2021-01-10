@@ -92,6 +92,7 @@ Mcu.UserConstants=
 Mcu.UserName=STM32H743ZITx
 MxCube.Version=6.1.0
 MxDb.Version=DB.6.0.10
+NVIC.ADC_IRQn=true\:0\:0\:false\:false\:true\:true\:true
 NVIC.BusFault_IRQn=true\:0\:0\:false\:false\:true\:false\:false
 NVIC.DMA1_Stream0_IRQn=true\:0\:0\:false\:false\:true\:false\:true
 NVIC.DebugMonitor_IRQn=true\:0\:0\:false\:false\:true\:false\:false

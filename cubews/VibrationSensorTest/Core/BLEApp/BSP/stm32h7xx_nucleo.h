@@ -184,6 +184,9 @@ typedef enum
   BUTTON_MODE_EXTI = 1
 } ButtonMode_TypeDef;
 
+#undef USE_BSP_COM_FEATURE
+#define USE_BSP_COM_FEATURE 1U
+
 #if (USE_BSP_COM_FEATURE > 0)
 typedef enum
 {
