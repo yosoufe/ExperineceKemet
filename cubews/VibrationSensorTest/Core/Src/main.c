@@ -209,6 +209,12 @@ int main(void)
     Error_Handler();
   }
 
+//  if (HAL_ADC_Start_IT(&hadc1) != HAL_OK)
+//  {
+//    /* Start Error */
+//    Error_Handler();
+//  }
+
   /* Timer enable */
   if (HAL_TIM_Base_Start(&htim3) != HAL_OK)
   {
