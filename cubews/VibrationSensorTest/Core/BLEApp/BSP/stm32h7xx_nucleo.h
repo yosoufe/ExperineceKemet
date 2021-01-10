@@ -153,7 +153,7 @@
   * @{
   */
 #ifndef USE_BSP_COM
-  #define USE_BSP_COM                           0U
+  #define USE_BSP_COM                           1U
 #endif
 
 #ifndef USE_COM_LOG
