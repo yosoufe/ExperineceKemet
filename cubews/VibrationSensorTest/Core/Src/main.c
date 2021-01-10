@@ -100,6 +100,7 @@ static void MX_ADC1_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_USART3_UART_Init(void);
 /* USER CODE BEGIN PFP */
+void fft_stuff(void);
 
 /* USER CODE END PFP */
 
@@ -122,6 +123,30 @@ void calculate_fft()
     freqs[i] = (int)(20*log10f(complexABS(fft_out[2*i], fft_out[2*i+1])));
   }
 }
+
+void fft_stuff(){
+  if (is_data_ready_for_fft == 1)
+    {
+      // copy half of adc buffer to fft buffer
+      for (size_t i = 0; i < ADC_BUF_LENGTH ; i++)
+      {
+	fft_in[i] = (float32_t)(adc_buf[i]) * 3.3 / 65535;
+      }
+      calculate_fft();
+      is_data_ready_for_fft = 0;
+    }
+    else if (is_data_ready_for_fft == 2)
+    {
+      // copy the other half of adc buffer to fft buffer
+      for (size_t i = 0; i < ADC_BUF_LENGTH; i++)
+      {
+	fft_in[i] = (float32_t)(adc_buf[i+ADC_BUF_LENGTH]) * 3.3 / 65535;
+      }
+      calculate_fft();
+      is_data_ready_for_fft = 0;
+    }
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -190,35 +215,13 @@ int main(void)
     /* Counter Enable Error */
     Error_Handler();
   }
-
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if (is_data_ready_for_fft == 1)
-    {
-      // copy half of adc buffer to fft buffer
-      for (size_t i = 0; i < ADC_BUF_LENGTH ; i++)
-      {
-        fft_in[i] = (float32_t)(adc_buf[i]) * 3.3 / 65535;
-      }
-      calculate_fft();
-      is_data_ready_for_fft = 0;
-    }
-    else if (is_data_ready_for_fft == 2)
-    {
-      // copy the other half of adc buffer to fft buffer
-      for (size_t i = 0; i < ADC_BUF_LENGTH; i++)
-      {
-        fft_in[i] = (float32_t)(adc_buf[i+ADC_BUF_LENGTH]) * 3.3 / 65535;
-      }
-      calculate_fft();
-      is_data_ready_for_fft = 0;
-    }
-
+    // fft_stuff();
     MX_BlueNRG_MS_Process();
     /* USER CODE END WHILE */
 

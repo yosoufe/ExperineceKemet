@@ -152,7 +152,7 @@ tBleStatus BlueMS_Switch_Update(uint16_t switch_status)
 //                                   0, 2, buff);
   ret = aci_gatt_update_char_value_ext_IDB05A1(SwitchServHandle, SwitchCharHandle,
 					       0x01, 250,
-					       0, 118,
+					       0, 110,
 					       sw_buff);
 
   if (ret != BLE_STATUS_SUCCESS){
