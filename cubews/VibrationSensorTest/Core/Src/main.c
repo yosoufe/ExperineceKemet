@@ -82,7 +82,7 @@ UART_HandleTypeDef huart3;
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
-uint16_t adc_buf[ADC_BUF_LENGTH];
+uint16_t adc_buf[ADC_BUF_LENGTH*2];
 float32_t fft_in[ADC_BUF_LENGTH];
 float32_t fft_out[ADC_BUF_LENGTH];
 int freqs[ADC_BUF_LENGTH/2];
@@ -178,7 +178,7 @@ int main(void)
   }
 
   /* Start ADC conversion on regular group with transfer by DMA */
-  if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, ADC_BUF_LENGTH) != HAL_OK)
+  if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, ADC_BUF_LENGTH*2) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
@@ -201,18 +201,19 @@ int main(void)
     if (is_data_ready_for_fft == 1)
     {
       // copy half of adc buffer to fft buffer
-      for (size_t i = 0; i < ADC_BUF_LENGTH/2 ; i++)
+      for (size_t i = 0; i < ADC_BUF_LENGTH ; i++)
       {
-        fft_in[i] = (float32_t)adc_buf[i] * 3.3 / 65535 - (3.3/2.0);
+        fft_in[i] = (float32_t)(adc_buf[i]) * 3.3 / 65535;
       }
+      calculate_fft();
       is_data_ready_for_fft = 0;
     }
     else if (is_data_ready_for_fft == 2)
     {
       // copy the other half of adc buffer to fft buffer
-      for (size_t i = ADC_BUF_LENGTH/2; i < ADC_BUF_LENGTH; i++)
+      for (size_t i = 0; i < ADC_BUF_LENGTH; i++)
       {
-        fft_in[i] = (float32_t)adc_buf[i] * 3.3 / 65535 - (3.3/2.0);
+        fft_in[i] = (float32_t)(adc_buf[i+ADC_BUF_LENGTH]) * 3.3 / 65535;
       }
       calculate_fft();
       is_data_ready_for_fft = 0;

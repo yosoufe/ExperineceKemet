@@ -55,11 +55,6 @@
 /* Private macros ------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
-extern AxesRaw_t x_axes;
-extern AxesRaw_t g_axes;
-extern AxesRaw_t m_axes;
-extern AxesRaw_t q_axes;
-
 extern volatile uint8_t set_connectable;
 extern volatile int     connected;
 /* at startup, suppose the X-NUCLEO-IDB04A1 is used */
@@ -75,9 +70,6 @@ extern uint16_t SWITCH_STATUS;
 /* Private function prototypes -----------------------------------------------*/
 static void User_Process(void);
 static void User_Init(void);
-static void Set_Random_Environmental_Values(float *data_t, float *data_p);
-static void Set_Random_Motion_Values(uint32_t cnt);
-static void Reset_Motion_Values(void);
 
 /* USER CODE BEGIN PFP */
 
@@ -115,25 +107,6 @@ void MX_BlueNRG_MS_Init(void)
   user_button_init_state = BSP_PB_GetState(BUTTON_KEY);
 
   hci_init(user_notify, NULL);
-
-  uint8_t val[] = {0x00};
-  ret = aci_hal_write_config_data(CONFIG_DATA_LL_WITHOUT_HOST,
-				  CONFIG_DATA_LL_WITHOUT_HOST_LEN  ,
-				  val);
-  if (ret) {
-    printf("Setting CONFIG_DATA_LL_WITHOUT_HOST failed 0x%02x.\n", ret);
-  }
-
-
-  uint8_t readVal[16];
-  uint8_t readLen;
-  ret = aci_hal_read_config_data(CONFIG_DATA_LL_WITHOUT_HOST,
-  			    CONFIG_DATA_LL_WITHOUT_HOST_LEN,
-			    &readLen,
-			    readVal);
-  if (ret) {
-    printf("aci_hal_read_config_data failed 0x%02x.\n", ret);
-  }
 
   /* get the BlueNRG HW and FW versions */
   getBlueNRGVersion(&hwVersion, &fwVersion);
@@ -203,22 +176,6 @@ void MX_BlueNRG_MS_Init(void)
 
   PRINTF("BLE Stack Initialized\n");
 
-  ret = Add_HWServW2ST_Service();
-  if(ret == BLE_STATUS_SUCCESS) {
-    PRINTF("BlueMS HW service added successfully.\n");
-  } else {
-    PRINTF("Error while adding BlueMS HW service: 0x%02x\r\n", ret);
-    while(1);
-  }
-
-  ret = Add_SWServW2ST_Service();
-  if(ret == BLE_STATUS_SUCCESS) {
-     PRINTF("BlueMS SW service added successfully.\n");
-  } else {
-     PRINTF("Error while adding BlueMS HW service: 0x%02x\r\n", ret);
-     while(1);
-  }
-
   ret = Add_Switch_Service();
   if(ret == BLE_STATUS_SUCCESS) {
      PRINTF("BlueMS SW service added successfully.\n");
@@ -263,10 +220,6 @@ static void User_Init(void)
  */
 static void User_Process(void)
 {
-  float data_t;
-  float data_p;
-  static uint32_t counter = 0;
-
   if (set_connectable)
   {
     Set_DeviceConnectable();
@@ -290,24 +243,9 @@ static void User_Process(void)
 
     if (connected)
     {
-      /* Set a random seed */
-      srand(HAL_GetTick());
-
-      /* Update emulated Environmental data */
-      Set_Random_Environmental_Values(&data_t, &data_p);
-      BlueMS_Environmental_Update((int32_t)(data_p *100), (int16_t)(data_t * 10));
+      /* Update SWITCH data */
       BlueMS_Switch_Update(SWITCH_STATUS);
 
-      /* Update emulated Acceleration, Gyroscope and Sensor Fusion data */
-      Set_Random_Motion_Values(counter);
-      Acc_Update(&x_axes, &g_axes, &m_axes);
-      Quat_Update(&q_axes);
-
-      counter ++;
-      if (counter == 40) {
-        counter = 0;
-        Reset_Motion_Values();
-      }
 #if !USE_BUTTON
       HAL_Delay(100); /* wait 1 sec before sending new data */
 #endif
@@ -317,80 +255,6 @@ static void User_Process(void)
     user_button_pressed = 0;
   }
 #endif
-}
-
-/**
- * @brief  Set random values for all environmental sensor data
- * @param  float pointer to temperature data
- * @param  float pointer to pressure data
- * @retval None
- */
-static void Set_Random_Environmental_Values(float *data_t, float *data_p)
-{
-  *data_t = 27.0 + ((uint64_t)rand()*5)/RAND_MAX;     /* T sensor emulation */
-  *data_p = 1000.0 + ((uint64_t)rand()*80)/RAND_MAX; /* P sensor emulation */
-}
-
-/**
- * @brief  Set random values for all motion sensor data
- * @param  uint32_t counter for changing the rotation direction
- * @retval None
- */
-static void Set_Random_Motion_Values(uint32_t cnt)
-{
-  /* Update Acceleration, Gyroscope and Sensor Fusion data */
-  if (cnt < 20) {
-    x_axes.AXIS_X +=  (10  + ((uint64_t)rand()*3*cnt)/RAND_MAX);
-    x_axes.AXIS_Y += -(10  + ((uint64_t)rand()*5*cnt)/RAND_MAX);
-    x_axes.AXIS_Z +=  (10  + ((uint64_t)rand()*7*cnt)/RAND_MAX);
-    g_axes.AXIS_X +=  (100 + ((uint64_t)rand()*2*cnt)/RAND_MAX);
-    g_axes.AXIS_Y += -(100 + ((uint64_t)rand()*4*cnt)/RAND_MAX);
-    g_axes.AXIS_Z +=  (100 + ((uint64_t)rand()*6*cnt)/RAND_MAX);
-    m_axes.AXIS_X +=  (3  + ((uint64_t)rand()*3*cnt)/RAND_MAX);
-    m_axes.AXIS_Y += -(3  + ((uint64_t)rand()*4*cnt)/RAND_MAX);
-    m_axes.AXIS_Z +=  (3  + ((uint64_t)rand()*5*cnt)/RAND_MAX);
-
-    q_axes.AXIS_X -= (100  + ((uint64_t)rand()*3*cnt)/RAND_MAX);
-    q_axes.AXIS_Y += (100  + ((uint64_t)rand()*5*cnt)/RAND_MAX);
-    q_axes.AXIS_Z -= (100  + ((uint64_t)rand()*7*cnt)/RAND_MAX);
-  }
-  else {
-    x_axes.AXIS_X += -(10  + ((uint64_t)rand()*3*cnt)/RAND_MAX);
-    x_axes.AXIS_Y +=  (10  + ((uint64_t)rand()*5*cnt)/RAND_MAX);
-    x_axes.AXIS_Z += -(10  + ((uint64_t)rand()*7*cnt)/RAND_MAX);
-    g_axes.AXIS_X += -(100 + ((uint64_t)rand()*2*cnt)/RAND_MAX);
-    g_axes.AXIS_Y +=  (100 + ((uint64_t)rand()*4*cnt)/RAND_MAX);
-    g_axes.AXIS_Z += -(100 + ((uint64_t)rand()*6*cnt)/RAND_MAX);
-    m_axes.AXIS_X += -(3  + ((uint64_t)rand()*7*cnt)/RAND_MAX);
-    m_axes.AXIS_Y +=  (3  + ((uint64_t)rand()*9*cnt)/RAND_MAX);
-    m_axes.AXIS_Z += -(3  + ((uint64_t)rand()*3*cnt)/RAND_MAX);
-
-    q_axes.AXIS_X += (200 + ((uint64_t)rand()*7*cnt)/RAND_MAX);
-    q_axes.AXIS_Y -= (150 + ((uint64_t)rand()*3*cnt)/RAND_MAX);
-    q_axes.AXIS_Z += (10  + ((uint64_t)rand()*5*cnt)/RAND_MAX);
-  }
-
-}
-
-/**
- * @brief  Reset values for all motion sensor data
- * @param  None
- * @retval None
- */
-static void Reset_Motion_Values(void)
-{
-  x_axes.AXIS_X = (x_axes.AXIS_X)%2000 == 0 ? -x_axes.AXIS_X : 10;
-  x_axes.AXIS_Y = (x_axes.AXIS_Y)%2000 == 0 ? -x_axes.AXIS_Y : -10;
-  x_axes.AXIS_Z = (x_axes.AXIS_Z)%2000 == 0 ? -x_axes.AXIS_Z : 10;
-  g_axes.AXIS_X = (g_axes.AXIS_X)%2000 == 0 ? -g_axes.AXIS_X : 100;
-  g_axes.AXIS_Y = (g_axes.AXIS_Y)%2000 == 0 ? -g_axes.AXIS_Y : -100;
-  g_axes.AXIS_Z = (g_axes.AXIS_Z)%2000 == 0 ? -g_axes.AXIS_Z : 100;
-  m_axes.AXIS_X = (g_axes.AXIS_X)%2000 == 0 ? -m_axes.AXIS_X : 3;
-  m_axes.AXIS_Y = (g_axes.AXIS_Y)%2000 == 0 ? -m_axes.AXIS_Y : -3;
-  m_axes.AXIS_Z = (g_axes.AXIS_Z)%2000 == 0 ? -m_axes.AXIS_Z : 3;
-  q_axes.AXIS_X = -q_axes.AXIS_X;
-  q_axes.AXIS_Y = -q_axes.AXIS_Y;
-  q_axes.AXIS_Z = -q_axes.AXIS_Z;
 }
 
 /**
