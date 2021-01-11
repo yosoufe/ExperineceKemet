@@ -24,8 +24,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #define ARM_MATH_CM4
-#include "arm_math.h"
 #include "app_bluenrg_ms.h"
+#include "errorHandling.h"
+#include "vibrationCalculations.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -36,8 +38,6 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-// ADC Buffer Length
-#define ADC_BUF_LENGTH 4096
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -71,7 +71,6 @@ uint8_t Rx_Buff[ETH_RX_DESC_CNT][ETH_MAX_PACKET_SIZE] __attribute__((section(".R
 
 ETH_TxPacketConfig TxConfig;
 ADC_HandleTypeDef hadc1;
-DMA_HandleTypeDef hdma_adc1;
 
 ETH_HandleTypeDef heth;
 
@@ -82,70 +81,24 @@ UART_HandleTypeDef huart3;
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
-uint16_t adc_buf[ADC_BUF_LENGTH*2];
-float32_t fft_in[ADC_BUF_LENGTH];
-float32_t fft_out[ADC_BUF_LENGTH];
-int freqs[ADC_BUF_LENGTH/2];
-arm_rfft_fast_instance_f32 fft_handler;
-char is_data_ready_for_fft = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_DMA_Init(void);
 static void MX_ETH_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_USART3_UART_Init(void);
 /* USER CODE BEGIN PFP */
-void fft_stuff(void);
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-// help from
-// https://github.com/YetAnotherElectronicsChannel/STM32_FFT_Spectrum_Analysis/blob/master/code%20STM32/Src/main.c
-float complexABS(float real, float compl) {
-  return sqrtf(real*real+compl*compl);
-}
 
-void calculate_fft()
-{
-  // calculate the fft
-  arm_rfft_fast_f32(&fft_handler, fft_in, fft_out, 0);
-
-  // mix the real and imaginary values of the fft output
-  for (size_t i = 0; i < ADC_BUF_LENGTH/2 ; i+=1)
-  {
-    freqs[i] = (int)(20*log10f(complexABS(fft_out[2*i], fft_out[2*i+1])));
-  }
-}
-
-void fft_stuff(){
-  if (is_data_ready_for_fft == 1)
-    {
-      // copy half of adc buffer to fft buffer
-      for (size_t i = 0; i < ADC_BUF_LENGTH ; i++)
-      {
-	fft_in[i] = (float32_t)(adc_buf[i]) * 3.3 / 65535;
-      }
-      calculate_fft();
-      is_data_ready_for_fft = 0;
-    }
-    else if (is_data_ready_for_fft == 2)
-    {
-      // copy the other half of adc buffer to fft buffer
-      for (size_t i = 0; i < ADC_BUF_LENGTH; i++)
-      {
-	fft_in[i] = (float32_t)(adc_buf[i+ADC_BUF_LENGTH]) * 3.3 / 65535;
-      }
-      calculate_fft();
-      is_data_ready_for_fft = 0;
-    }
-}
 
 /* USER CODE END 0 */
 
@@ -177,7 +130,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_ETH_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_ADC1_Init();
@@ -189,11 +141,7 @@ int main(void)
   MX_BlueNRG_MS_Init();
 
   // initialize the fft
-  arm_status fft_init_status = arm_rfft_fast_init_f32 (&fft_handler, ADC_BUF_LENGTH);
-  if ( fft_init_status != ARM_MATH_SUCCESS )
-  {
-    Error_Handler();
-  }
+  // init_fft();
 
   /* Run the ADC calibration in single-ended mode */
   if (HAL_ADCEx_Calibration_Start(&hadc1, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED) != HAL_OK)
@@ -203,17 +151,17 @@ int main(void)
   }
 
   /* Start ADC conversion on regular group with transfer by DMA */
-  if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, ADC_BUF_LENGTH*2) != HAL_OK)
-  {
-    /* Start Error */
-    Error_Handler();
-  }
-
-//  if (HAL_ADC_Start_IT(&hadc1) != HAL_OK)
+//  if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, FFT_NUMBER_SAMPLES*2) != HAL_OK)
 //  {
 //    /* Start Error */
 //    Error_Handler();
 //  }
+
+  if (HAL_ADC_Start_IT(&hadc1) != HAL_OK)
+  {
+    /* Start Error */
+    Error_Handler();
+  }
 
   /* Timer enable */
   if (HAL_TIM_Base_Start(&htim3) != HAL_OK)
@@ -227,7 +175,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // fft_stuff();
+    // fft_process();
     MX_BlueNRG_MS_Process();
     /* USER CODE END WHILE */
 
@@ -355,7 +303,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIG_T3_TRGO;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
-  hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DMA_CIRCULAR;
+  hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
   hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
   hadc1.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
   hadc1.Init.OversamplingMode = DISABLE;
@@ -565,22 +513,6 @@ static void MX_USB_OTG_FS_PCD_Init(void)
 }
 
 /**
-  * Enable DMA controller clock
-  */
-static void MX_DMA_Init(void)
-{
-
-  /* DMA controller clock enable */
-  __HAL_RCC_DMA1_CLK_ENABLE();
-
-  /* DMA interrupt init */
-  /* DMA1_Stream0_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
-
-}
-
-/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -684,11 +616,6 @@ static void MX_GPIO_Init(void)
   */
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
 {
-  // copy to fft_in buffer of fft calculation is not finished yet?
-//  if (is_data_ready_for_fft != 0)
-//  {
-//    Error_Handler();
-//  }
   HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
   is_data_ready_for_fft = 1;
 }
@@ -700,34 +627,16 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-  // copy to fft_in buffer is not finished yet?
-//  if (is_data_ready_for_fft != 0)
-//  {
-//    Error_Handler();
-//  }
+  static uint32_t counter = 0;
   HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
   is_data_ready_for_fft = 2;
+  printf("%ld\n", counter);
+  counter++;
 }
 
 /* USER CODE END 4 */
 
-/**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
-void Error_Handler(void)
-{
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
-  while (1)
-  {
-    /* Toggle LED3 */
-    HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-    HAL_Delay(500);
-  }
-  /* USER CODE END Error_Handler_Debug */
-}
+
 
 #ifdef  USE_FULL_ASSERT
 /**

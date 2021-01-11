@@ -2194,7 +2194,6 @@ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef *hadc, uint32_t *pData, ui
            hadc->Init.Overrun is set to ADC_OVR_DATA_OVERWRITTEN. Therefore,
            ADC_IT_OVR is enabled. */
         __HAL_ADC_ENABLE_IT(hadc, ADC_IT_OVR);
-        __HAL_ADC_ENABLE_IT(hadc, ADC_IT_EOC);
 
         /* Enable ADC DMA  mode*/
 #if defined(ADC_VER_V5_V90)
