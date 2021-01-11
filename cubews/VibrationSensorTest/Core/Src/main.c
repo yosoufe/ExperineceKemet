@@ -118,7 +118,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  vibration_init();
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -177,6 +177,7 @@ int main(void)
   {
     // fft_process();
     MX_BlueNRG_MS_Process();
+    vibration_process();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -614,12 +615,15 @@ static void MX_GPIO_Init(void)
   * @param  hadc: ADC handle
   * @retval None
   */
-void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
-{
-  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
-  is_data_ready_for_fft = 1;
-}
+//void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
+//{
+//  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
+//  is_data_ready_for_fft = 1;
+//}
 
+
+int32_t adc_value = 0;
+int32_t sensor_offset = 32767;
 /**
   * @brief  Conversion DMA half-transfer callback in non-blocking mode
   * @param  hadc: ADC handle
@@ -627,11 +631,11 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-  static uint32_t counter = 0;
   HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
-  is_data_ready_for_fft = 2;
-  printf("%ld\n", counter);
-  counter++;
+//  is_data_ready_for_fft = 2;
+  adc_value = HAL_ADC_GetValue(hadc);
+  int32_t corrected_adc = adc_value-sensor_offset;
+  mean_square_add_value(corrected_adc, &vibrationMeanSquare);
 }
 
 /* USER CODE END 4 */

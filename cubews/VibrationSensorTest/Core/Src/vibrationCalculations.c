@@ -8,13 +8,17 @@
 
 #include "vibrationCalculations.h"
 #include "errorHandling.h"
+#include "stdio.h"
 
+// Buffering and FFT
 uint16_t adc_buf[FFT_NUMBER_SAMPLES*2];
 float32_t fft_out[FFT_NUMBER_SAMPLES];
 float32_t fft_in[FFT_NUMBER_SAMPLES];
 int freqs[FFT_NUMBER_SAMPLES/2];
 char is_data_ready_for_fft = 0;
 arm_rfft_fast_instance_f32 fft_handler;
+
+
 
 void init_fft(){
   arm_status fft_init_status = arm_rfft_fast_init_f32 (&fft_handler, FFT_NUMBER_SAMPLES);
@@ -63,4 +67,69 @@ void fft_process(){
     calculate_fft();
     is_data_ready_for_fft = 0;
   }
+}
+
+
+// Moving Mean Square (MS) Calculation
+void mean_square_init(uint16_t window_length, MeanSquare* ms){
+  if (window_length > MAX_MEAN_SQUARE_WINDOW_SIZE)
+  {
+    Error_Handler();
+  }
+  ms->window_length = window_length;
+  ms->sum_square = 0;
+  ms->mean_square = 0;
+  ms->idx_start = 0;
+  ms->idx_end = 0;
+}
+
+void mean_square_add_value(int32_t value, MeanSquare* ms){
+  // calculate the square
+  uint32_t square = value * value;
+  // add the square at the index to history
+  ms->history[ms->idx_end] = square;
+  // calculate the new end index in history
+  ms->idx_end = (ms->idx_end + 1) % MAX_MEAN_SQUARE_WINDOW_SIZE;
+  uint16_t count_valid_elements = (ms->idx_end - ms->idx_start) % MAX_MEAN_SQUARE_WINDOW_SIZE;
+  if (count_valid_elements > ms->window_length)
+  {
+    uint16_t target_start_idx = (ms->idx_end - ms->window_length) % MAX_MEAN_SQUARE_WINDOW_SIZE;
+    while(ms->idx_start != target_start_idx){
+      // remove the start from the sum
+      ms->sum_square -= ms->history[ms->idx_start];
+      ms->idx_start = (ms->idx_start+1) % MAX_MEAN_SQUARE_WINDOW_SIZE;
+    }
+    count_valid_elements = (ms->idx_end - ms->idx_start) % MAX_MEAN_SQUARE_WINDOW_SIZE;
+  }
+  // add the square to the sum
+  ms->sum_square += square;
+  // update the mean
+  ms->mean_square = ms->sum_square / count_valid_elements;
+}
+
+void mean_square_update_window_length(uint16_t window_length, MeanSquare* ms){
+  uint16_t count_valid_elements = ms->idx_end - ms->idx_start;
+  if(window_length < count_valid_elements){
+    ms->idx_start = (ms->idx_end - count_valid_elements + 1) % MAX_MEAN_SQUARE_WINDOW_SIZE;
+    ms->sum_square = 0;
+    uint16_t idx = ms->idx_start;
+    while(idx != ms->idx_end){
+      ms->sum_square += ms->history[idx];
+      idx = (idx+1) % MAX_MEAN_SQUARE_WINDOW_SIZE;
+    }
+    ms->mean_square = ms->sum_square / window_length;
+  }
+  ms->window_length = window_length;
+}
+
+MeanSquare vibrationMeanSquare;
+
+void vibration_init()
+{
+  mean_square_init(512, &vibrationMeanSquare);
+}
+
+void vibration_process()
+{
+
 }
