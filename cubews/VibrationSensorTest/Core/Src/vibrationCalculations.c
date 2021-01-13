@@ -10,14 +10,13 @@
 #include "errorHandling.h"
 #include "stdio.h"
 
-// Buffering and FFT
+/********** FFT Calculation ***********/
 uint16_t adc_buf[FFT_NUMBER_SAMPLES*2];
 float32_t fft_out[FFT_NUMBER_SAMPLES];
 float32_t fft_in[FFT_NUMBER_SAMPLES];
 int freqs[FFT_NUMBER_SAMPLES/2];
 char is_data_ready_for_fft = 0;
 arm_rfft_fast_instance_f32 fft_handler;
-
 
 
 void init_fft(){
@@ -70,7 +69,7 @@ void fft_process(){
 }
 
 
-// Moving Mean Square (MS) Calculation
+/********* Moving Mean Square (MS) Calculation **********/
 void mean_square_init(uint16_t window_length, MeanSquare* ms){
   if (window_length > MAX_MEAN_SQUARE_WINDOW_SIZE)
   {
@@ -122,7 +121,11 @@ void mean_square_update_window_length(uint16_t window_length, MeanSquare* ms){
   ms->window_length = window_length;
 }
 
+
+/******* VIBRATION ANALYSIS ********/
 MeanSquare vibrationMeanSquare;
+char new_measurement_arrived = 0;
+float mean_square_threshold = 50000;
 
 void vibration_init()
 {
@@ -131,5 +134,14 @@ void vibration_init()
 
 void vibration_process()
 {
+  if(new_measurement_arrived == 0)
+  {
+    return;
+  }
+  if(vibrationMeanSquare.mean_square > mean_square_threshold)
+  {
+    // send notification
+  }
 
+  new_measurement_arrived = 0;
 }

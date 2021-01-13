@@ -40,13 +40,6 @@ __IO uint16_t connection_handle = 0;
 __IO uint8_t  notification_enabled = FALSE;
 __IO uint32_t connected = FALSE;
 
-extern uint16_t EnvironmentalCharHandle;
-extern uint16_t AccGyroMagCharHandle;
-
-volatile uint8_t request_free_fall_notify = FALSE;
-
-uint16_t SWITCH_STATUS = 0x0000;
-
 /* Private function prototypes -----------------------------------------------*/
 void GAP_DisconnectionComplete_CB(void);
 void GAP_ConnectionComplete_CB(uint8_t addr[6], uint16_t handle);
@@ -146,7 +139,6 @@ void user_notify(void * pData)
     {
       evt_blue_aci *blue_evt = (void*)event_pckt->data;
       switch(blue_evt->ecode){
-
       case EVT_BLUE_GATT_READ_PERMIT_REQ:
         {
           evt_gatt_read_permit_req *pr = (void*)blue_evt->data;
@@ -157,21 +149,6 @@ void user_notify(void * pData)
 	{
 	  evt_gatt_attr_modified_IDB05A1 *pr = (void*)blue_evt->data;
 	  Write_Request_CB(pr->attr_handle, pr->att_data);
-	}
-	break;
-      case EVT_BLUE_L2CAP_CONN_UPD_REQ:
-        {
-          PRINTF("EVT_BLUE_L2CAP_CONN_UPD_REQ\n");
-	}
-	break;
-      case EVT_BLUE_L2CAP_PROCEDURE_TIMEOUT:
-	{
-	  PRINTF("EVT_BLUE_L2CAP_PROCEDURE_TIMEOUT\n");
-      	}
-      	break;
-      case EVT_BLUE_L2CAP_CONN_UPD_RESP:
-	{
-	  PRINTF("EVT_BLUE_L2CAP_CONN_UPD_RESP\n");
 	}
 	break;
       }

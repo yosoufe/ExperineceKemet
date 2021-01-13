@@ -10,7 +10,7 @@
 
 #include "arm_math.h"
 
-// ADC Buffer Length
+/********** FFT Calculation ***********/
 #define FFT_NUMBER_SAMPLES 4096
 
 extern uint16_t adc_buf[FFT_NUMBER_SAMPLES*2];
@@ -25,7 +25,7 @@ void calculate_fft();
 void fft_process();
 
 
-// Moving Mean Square (MS) Calculation
+/********* Moving Mean Square (MS) Calculation **********/
 #define MAX_MEAN_SQUARE_WINDOW_SIZE 2048U
 
 typedef struct _MeanSquare {
@@ -41,7 +41,10 @@ void mean_square_init(uint16_t window_length, MeanSquare* ms);
 void mean_square_add_value(int32_t value, MeanSquare* ms);
 void mean_square_update_window_length(uint16_t window_length, MeanSquare* ms);
 
+/******* VIBRATION ANALYSIS ********/
 extern MeanSquare vibrationMeanSquare;
+extern char new_measurement_arrived;
+extern float mean_square_threshold;
 
 void vibration_init();
 void vibration_process();

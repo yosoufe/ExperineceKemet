@@ -176,7 +176,7 @@ void MX_BlueNRG_MS_Init(void)
 
   PRINTF("BLE Stack Initialized\n");
 
-  ret = Add_Switch_Service();
+  ret = Add_MyBle_Service();
   if(ret == BLE_STATUS_SUCCESS) {
      PRINTF("BlueMS SW service added successfully.\n");
   } else {
@@ -244,7 +244,7 @@ static void User_Process(void)
     if (connected)
     {
       /* Update SWITCH data */
-      BlueMS_Switch_Update(SWITCH_STATUS);
+      Ble_Threshold_Update(SWITCH_STATUS);
 
 #if !USE_BUTTON
       HAL_Delay(100); /* wait 1 sec before sending new data */

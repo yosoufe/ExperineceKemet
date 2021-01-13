@@ -176,7 +176,7 @@ int main(void)
   while (1)
   {
     // fft_process();
-    MX_BlueNRG_MS_Process();
+//    MX_BlueNRG_MS_Process();
     vibration_process();
     /* USER CODE END WHILE */
 
@@ -636,6 +636,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
   adc_value = HAL_ADC_GetValue(hadc);
   int32_t corrected_adc = adc_value-sensor_offset;
   mean_square_add_value(corrected_adc, &vibrationMeanSquare);
+  new_measurement_arrived = 1;
 }
 
 /* USER CODE END 4 */
