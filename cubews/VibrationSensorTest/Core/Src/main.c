@@ -71,12 +71,14 @@ uint8_t Rx_Buff[ETH_RX_DESC_CNT][ETH_MAX_PACKET_SIZE] __attribute__((section(".R
 
 ETH_TxPacketConfig TxConfig;
 ADC_HandleTypeDef hadc1;
+DMA_HandleTypeDef hdma_adc1;
 
 ETH_HandleTypeDef heth;
 
 TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart3;
+DMA_HandleTypeDef hdma_usart3_tx;
 
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
@@ -87,6 +89,7 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_ETH_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_ADC1_Init(void);
@@ -130,6 +133,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_ETH_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_ADC1_Init();
@@ -157,11 +161,11 @@ int main(void)
 //    Error_Handler();
 //  }
 
-  if (HAL_ADC_Start_IT(&hadc1) != HAL_OK)
-  {
-    /* Start Error */
-    Error_Handler();
-  }
+//  if (HAL_ADC_Start_IT(&hadc1) != HAL_OK)
+//  {
+//    /* Start Error */
+//    Error_Handler();
+//  }
 
   /* Timer enable */
   if (HAL_TIM_Base_Start(&htim3) != HAL_OK)
@@ -173,11 +177,16 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint16_t test_buf[] = {1, 2, 3, 4};
+
   while (1)
   {
     // fft_process();
 //    MX_BlueNRG_MS_Process();
-    vibration_process();
+//    vibration_process();
+
+    HAL_UART_Transmit_DMA(&huart3, (uint8_t*)test_buf, 4*2);
+    HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -304,7 +313,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIG_T3_TRGO;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
-  hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
+  hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DMA_CIRCULAR;
   hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
   hadc1.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
   hadc1.Init.OversamplingMode = DISABLE;
@@ -514,6 +523,26 @@ static void MX_USB_OTG_FS_PCD_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA2_CLK_ENABLE();
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Stream1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
+  /* DMA2_Stream2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -610,16 +639,19 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+
 /**
   * @brief  Conversion complete callback in non-blocking mode
   * @param  hadc: ADC handle
   * @retval None
   */
-//void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
-//{
+void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
+{
+  // With DMA
 //  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
 //  is_data_ready_for_fft = 1;
-//}
+//  HAL_UART_Transmit_DMA(&huart3, (uint8_t*)adc_buf, FFT_NUMBER_SAMPLES*2);
+}
 
 
 int32_t adc_value = 0;
@@ -631,16 +663,19 @@ int32_t sensor_offset = 32767;
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
-//  is_data_ready_for_fft = 2;
-  adc_value = HAL_ADC_GetValue(hadc);
-  int32_t corrected_adc = adc_value-sensor_offset;
-  mean_square_add_value(corrected_adc, &vibrationMeanSquare);
-  new_measurement_arrived = 1;
+  // Without DMA
+//  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
+//  adc_value = HAL_ADC_GetValue(hadc);
+//  int32_t corrected_adc = adc_value-sensor_offset;
+//  mean_square_add_value(corrected_adc, &vibrationMeanSquare);
+//  new_measurement_arrived = 1;
+
+  // With DMA
+  //  is_data_ready_for_fft = 2;
+//  HAL_UART_Transmit_DMA(&huart3, (uint8_t*)(adc_buf+FFT_NUMBER_SAMPLES/2), FFT_NUMBER_SAMPLES*2);
 }
 
 /* USER CODE END 4 */
-
 
 
 #ifdef  USE_FULL_ASSERT

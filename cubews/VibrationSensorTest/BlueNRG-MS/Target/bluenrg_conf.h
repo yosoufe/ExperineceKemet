@@ -33,7 +33,7 @@ extern "C" {
 #include <string.h>
 
 /*---------- Print messages from BLE1 files at user level -----------*/
-#define BLE1_DEBUG      1
+#define BLE1_DEBUG      0
 /*---------- Print the data travelling over the SPI in the .csv format compatible with the ST BlueNRG GUI -----------*/
 #define PRINT_CSV_FORMAT      0
 /*---------- Number of Bytes reserved for HCI Read Packet -----------*/

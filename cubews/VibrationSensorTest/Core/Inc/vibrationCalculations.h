@@ -13,6 +13,7 @@
 /********** FFT Calculation ***********/
 #define FFT_NUMBER_SAMPLES 4096
 
+
 extern uint16_t adc_buf[FFT_NUMBER_SAMPLES*2];
 extern float32_t fft_out[FFT_NUMBER_SAMPLES];
 extern int freqs[FFT_NUMBER_SAMPLES/2];
