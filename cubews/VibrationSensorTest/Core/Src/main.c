@@ -155,11 +155,11 @@ int main(void)
   }
 
   /* Start ADC conversion on regular group with transfer by DMA */
-//  if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, FFT_NUMBER_SAMPLES*2) != HAL_OK)
-//  {
-//    /* Start Error */
-//    Error_Handler();
-//  }
+  if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, FFT_NUMBER_SAMPLES*2) != HAL_OK)
+  {
+    /* Start Error */
+    Error_Handler();
+  }
 
 //  if (HAL_ADC_Start_IT(&hadc1) != HAL_OK)
 //  {
@@ -177,7 +177,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint16_t test_buf[] = {1, 2, 3, 4};
+//  uint16_t test_buf[] = {1, 2, 3, 4};
 
   while (1)
   {
@@ -185,8 +185,8 @@ int main(void)
 //    MX_BlueNRG_MS_Process();
 //    vibration_process();
 
-    HAL_UART_Transmit_DMA(&huart3, (uint8_t*)test_buf, 4*2);
-    HAL_Delay(500);
+//    HAL_UART_Transmit_DMA(&huart3, (uint8_t*)test_buf, 4*2);
+//    HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -650,7 +650,7 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
   // With DMA
 //  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
 //  is_data_ready_for_fft = 1;
-//  HAL_UART_Transmit_DMA(&huart3, (uint8_t*)adc_buf, FFT_NUMBER_SAMPLES*2);
+  HAL_UART_Transmit_DMA(&huart3, (uint8_t*)adc_buf, FFT_NUMBER_SAMPLES*2);
 }
 
 
@@ -672,7 +672,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 
   // With DMA
   //  is_data_ready_for_fft = 2;
-//  HAL_UART_Transmit_DMA(&huart3, (uint8_t*)(adc_buf+FFT_NUMBER_SAMPLES/2), FFT_NUMBER_SAMPLES*2);
+  HAL_UART_Transmit_DMA(&huart3, (uint8_t*)(adc_buf+FFT_NUMBER_SAMPLES/2), FFT_NUMBER_SAMPLES*2);
 }
 
 /* USER CODE END 4 */

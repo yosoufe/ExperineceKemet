@@ -11,7 +11,7 @@
 #include "arm_math.h"
 
 /********** FFT Calculation ***********/
-#define FFT_NUMBER_SAMPLES 4096
+#define FFT_NUMBER_SAMPLES 1024
 
 
 extern uint16_t adc_buf[FFT_NUMBER_SAMPLES*2];
