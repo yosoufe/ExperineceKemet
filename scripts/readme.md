@@ -14,5 +14,7 @@ python3 -m pip install -U gattlib bluepy # two different BLE lib
 python3 -m pip install -U futures blue-st-sdk # not that much usefull, needs sudo
 python3 -m pip install -U pybluez # for testing L2CAP
 
-python3 -m pip install jupyterlab serial bokeh pyrealsense2
+python3 -m pip uninstall serial
+
+python3 -m pip install jupyterlab pyserial bokeh pyrealsense2
 ```
