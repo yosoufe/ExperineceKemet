@@ -3,6 +3,7 @@
 **/Debug
 */.ipynb_checkpoints
 */BLE_EXAMPLES
+*/data/
 
 # Prerequisites
 *.d
