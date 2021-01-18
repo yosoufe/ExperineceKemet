@@ -71,7 +71,6 @@ uint8_t Rx_Buff[ETH_RX_DESC_CNT][ETH_MAX_PACKET_SIZE] __attribute__((section(".R
 
 ETH_TxPacketConfig TxConfig;
 ADC_HandleTypeDef hadc1;
-DMA_HandleTypeDef hdma_adc1;
 
 ETH_HandleTypeDef heth;
 
@@ -101,7 +100,7 @@ static void MX_USART3_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+uint8_t uart_sending = 0;
 
 /* USER CODE END 0 */
 
@@ -154,18 +153,20 @@ int main(void)
     Error_Handler();
   }
 
+#if USE_ADC_DMA
   /* Start ADC conversion on regular group with transfer by DMA */
   if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buf, FFT_NUMBER_SAMPLES*2) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
-
-//  if (HAL_ADC_Start_IT(&hadc1) != HAL_OK)
-//  {
-//    /* Start Error */
-//    Error_Handler();
-//  }
+#else
+  if (HAL_ADC_Start_IT(&hadc1) != HAL_OK)
+  {
+    /* Start Error */
+    Error_Handler();
+  }
+#endif // USE_ADC_DMA
 
   /* Timer enable */
   if (HAL_TIM_Base_Start(&htim3) != HAL_OK)
@@ -178,6 +179,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 //  uint16_t test_buf[] = {1, 2, 3, 4};
+
+  HAL_UART_Receive_IT(&huart3, (uint8_t *)&uart_sending, 1);
 
   while (1)
   {
@@ -313,7 +316,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIG_T3_TRGO;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
-  hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DMA_CIRCULAR;
+  hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
   hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
   hadc1.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
   hadc1.Init.OversamplingMode = DISABLE;
@@ -530,12 +533,8 @@ static void MX_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA2_CLK_ENABLE();
-  __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
-  /* DMA1_Stream1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
   /* DMA2_Stream2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
@@ -647,15 +646,20 @@ static void MX_GPIO_Init(void)
   */
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
 {
-  // With DMA
-//  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
-//  is_data_ready_for_fft = 1;
-  HAL_UART_Transmit_DMA(&huart3, (uint8_t*)adc_buf, FFT_NUMBER_SAMPLES*2);
+#if USE_ADC_DMA
+  //  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
+  //  is_data_ready_for_fft = 1;
+    HAL_UART_Transmit_DMA(&huart3, (uint8_t*)adc_buf, FFT_NUMBER_SAMPLES*2);
+#else
+
+#endif // USE_ADC_DMA
 }
 
-
+#if !defined(USE_ADC_DMA)
 int32_t adc_value = 0;
 int32_t sensor_offset = 32767;
+#endif // USE_ADC_DMA
+
 /**
   * @brief  Conversion DMA half-transfer callback in non-blocking mode
   * @param  hadc: ADC handle
@@ -663,20 +667,32 @@ int32_t sensor_offset = 32767;
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-  // Without DMA
-//  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
-//  adc_value = HAL_ADC_GetValue(hadc);
-//  int32_t corrected_adc = adc_value-sensor_offset;
-//  mean_square_add_value(corrected_adc, &vibrationMeanSquare);
-//  new_measurement_arrived = 1;
-
-  // With DMA
+#if USE_ADC_DMA
   //  is_data_ready_for_fft = 2;
   HAL_UART_Transmit_DMA(&huart3, (uint8_t*)(adc_buf+FFT_NUMBER_SAMPLES/2), FFT_NUMBER_SAMPLES*2);
+#else
+  adc_value = HAL_ADC_GetValue(hadc);
+  if (uart_sending == 1)
+  {
+    HAL_UART_Transmit_DMA(&huart3, (uint8_t*)(&adc_value), 2);
+  }
+  //  int32_t corrected_adc = adc_value-sensor_offset;
+  //  mean_square_add_value(corrected_adc, &vibrationMeanSquare);
+  //  new_measurement_arrived = 1;
+#endif // USE_ADC_DMA
+}
+
+/**
+  * @brief  Rx Transfer completed callback.
+  * @param  huart UART handle.
+  * @retval None
+  */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  HAL_UART_Receive_IT(&huart3, (uint8_t *)&uart_sending, 1);
 }
 
 /* USER CODE END 4 */
-
 
 #ifdef  USE_FULL_ASSERT
 /**
