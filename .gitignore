@@ -4,6 +4,7 @@
 */.ipynb_checkpoints
 */BLE_EXAMPLES
 */data/
+**/__pycache__/*
 
 # Prerequisites
 *.d

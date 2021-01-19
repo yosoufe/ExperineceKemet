@@ -18,3 +18,11 @@ python3 -m pip uninstall serial
 
 python3 -m pip install jupyterlab pyserial bokeh pyrealsense2
 ```
+
+
+For jetson
+```
+sudo iw dev wlan0 set power_save off
+sudo jetson_clocks
+sudo nvpmodel -m 0
+```
