@@ -11,18 +11,20 @@
 #include "arm_math.h"
 
 /********** FFT Calculation ***********/
-#define FFT_NUMBER_SAMPLES 4048
+#define FFT_NUMBER_SAMPLES 512
+#define SAMPLINNG_FREQUENCY 1000.0f
 
 
 extern uint16_t adc_buf[FFT_NUMBER_SAMPLES*2];
 extern float32_t fft_out[FFT_NUMBER_SAMPLES];
-extern int freqs[FFT_NUMBER_SAMPLES/2];
+extern int fft_db[FFT_NUMBER_SAMPLES/2];
 extern char is_data_ready_for_fft;
 
 
 void init_fft();
-float complexABS(float real, float compl);
+float32_t complexABS(float real, float compl);
 void calculate_fft();
+void check_fft_results();
 void fft_process();
 
 

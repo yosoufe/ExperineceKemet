@@ -8,6 +8,6 @@
 #ifndef INC_ERRORHANDLING_H_
 #define INC_ERRORHANDLING_H_
 
-void Error_Handler(void);
+extern void Error_Handler(void);
 
 #endif /* INC_ERRORHANDLING_H_ */
