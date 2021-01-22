@@ -20,6 +20,9 @@ extern float32_t fft_out[FFT_NUMBER_SAMPLES];
 extern int fft_db[FFT_NUMBER_SAMPLES/2];
 extern char is_data_ready_for_fft;
 
+extern uint32_t largest_freqs;
+extern uint32_t largest_fft;
+
 
 void init_fft();
 float32_t complexABS(float real, float compl);

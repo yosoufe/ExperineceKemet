@@ -11,6 +11,7 @@
 #include "stdio.h"
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx_nucleo.h"
+#include "app_bluenrg_ms.h"
 
 /********** FFT Calculation ***********/
 uint16_t adc_buf[FFT_NUMBER_SAMPLES*2];
@@ -58,16 +59,25 @@ void calculate_fft()
 uint32_t time_alarm_led_is_on = 0;
 unsigned char alarm_status = 0;
 
+uint32_t largest_freqs;
+uint32_t largest_fft;
+
 void check_fft_results()
 {
-  // for debug only
-  volatile float32_t *interesting_view = &fft_abs[fft_idx_start_moinitoring];
+  largest_freqs = 0;
+  largest_fft = 0;
   for (uint16_t idx = fft_idx_start_moinitoring; idx < fft_idx_end_moinitoring; idx++){
     if (fft_abs[idx] > fft_threshold)
     {
+      if (fft_abs[idx]>largest_fft)
+      {
+	largest_fft = fft_abs[idx];
+	largest_freqs = idx;
+      }
       HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
       time_alarm_led_is_on = HAL_GetTick();
       alarm_status = 1;
+      MX_BlueNRG_Notify();
     }
   }
 }

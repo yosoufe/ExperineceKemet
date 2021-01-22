@@ -64,7 +64,7 @@ static volatile uint8_t user_button_init_state = 1;
 static volatile uint8_t user_button_pressed = 0;
 
 /* USER CODE BEGIN PV */
-extern uint16_t SWITCH_STATUS;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -225,36 +225,21 @@ static void User_Process(void)
     Set_DeviceConnectable();
     set_connectable = FALSE;
   }
+//  BSP_LED_Toggle(LED2);
 
-#if USE_BUTTON
-  /* Check if the user has pushed the button */
-  if (user_button_pressed)
+//  if (connected)
+//  {
+//    Ble_Threshold_Update();
+//    HAL_Delay(100); /* wait 1 sec before sending new data */
+//  }
+}
+
+void MX_BlueNRG_Notify(void){
+  if (connected)
   {
-    /* Debouncing */
-    HAL_Delay(50);
-
-    /* Wait until the User Button is released */
-    while (BSP_PB_GetState(BUTTON_KEY) == !user_button_init_state);
-
-    /* Debouncing */
-    HAL_Delay(50);
-#endif
-    BSP_LED_Toggle(LED2);
-
-    if (connected)
-    {
-      /* Update SWITCH data */
-      Ble_Threshold_Update(SWITCH_STATUS);
-
-#if !USE_BUTTON
-      HAL_Delay(100); /* wait 1 sec before sending new data */
-#endif
-    }
-#if USE_BUTTON
-    /* Reset the User Button flag */
-    user_button_pressed = 0;
+    // Notify with a new value
+    Ble_CurrentValue_Update();
   }
-#endif
 }
 
 /**

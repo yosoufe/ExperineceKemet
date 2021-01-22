@@ -169,7 +169,8 @@ tBleStatus Ble_CurrentValue_Update()
 {
   tBleStatus ret;
   static uint8_t buff[8];
-  HOST_TO_LE_64(buff,(uint64_t)(vibrationMeanSquare.mean_square));
+  HOST_TO_LE_32(buff,largest_freqs);
+  HOST_TO_LE_32(buff+4,largest_fft);
   ret = aci_gatt_update_char_value(MyBleServHandle,
 				   NotificationCharHandle,
                                    0, 8, buff);

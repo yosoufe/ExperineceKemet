@@ -181,8 +181,7 @@ int main(void)
 
   while (1)
   {
-    // fft_process();
-//    MX_BlueNRG_MS_Process();
+    MX_BlueNRG_MS_Process();
     vibration_process();
 
     /* USER CODE END WHILE */
