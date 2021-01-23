@@ -48,3 +48,27 @@ You should use bump method. Induce the short vibration with like a hammer. From 
 vibration. Sudden hit can be [0.1 - 0.2] seconds. One jump or dropping a weight could simulate it.
 The hit should be close to the sensor.
 
+# Remote Programming Nucleo
+
+On jetson I compiled OpenOCD from source and I am using that. I added it's bin directory path to $PATH then
+
+To test your installation and version:
+```
+$ openocd -v
+Open On-Chip Debugger 0.11.0-rc1+dev-00026-gaaa6110d9-dirty (2021-01-16-20:33)
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+```
+
+```
+cd /home/yousof/software/openocd/install/share/openocd/scripts/board/
+openocd -c 'bindto 0.0.0.0' -f st_nucleo_h743zi.cfg
+```
+
+# Some Random Notes:
+
+`p` tag in the report
+```html
+<p style="max-width: 740px;text-align: justify;"> </p>
+```

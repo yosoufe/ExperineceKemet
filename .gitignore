@@ -5,6 +5,7 @@
 */BLE_EXAMPLES
 */data/
 **/__pycache__/*
+telegram_bot_token.py
 
 # Prerequisites
 *.d

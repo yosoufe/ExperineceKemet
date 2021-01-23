@@ -17,6 +17,9 @@ python3 -m pip install -U pybluez # for testing L2CAP
 python3 -m pip uninstall serial
 
 python3 -m pip install jupyterlab pyserial bokeh pyrealsense2
+
+python3 -m pip install python-telegram-bot
+
 ```
 
 
