@@ -1,5 +1,4 @@
-# ExperineceKemet
-Experinece with Vibration Sensor (Kemet)
+# [Experinece with Vibration Sensor (Kemet)](https://www.element14.com/community/community/design-challenges/experimenting-with-vibration-sensors/blog/authors/yosoufe?ICID=DCH-vibrationSense-challengers)
 
 # Measurement Techniques
 Measuring the vibrations ins important:
