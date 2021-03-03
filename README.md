@@ -69,5 +69,7 @@ openocd -c 'bindto 0.0.0.0' -f st_nucleo_h743zi.cfg
 
 `p` tag in the report
 ```html
+<center style="max-width: 740px; text-align: justify; margin: auto;">
 <p style="max-width: 740px;text-align: justify; margin: auto;"> </p>
+</center>
 ```
