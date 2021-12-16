@@ -1,49 +1,51 @@
 # [Experinece with Vibration Sensor (Kemet)](https://www.element14.com/community/community/design-challenges/experimenting-with-vibration-sensors/blog/authors/yosoufe?ICID=DCH-vibrationSense-challengers)
 
-# Measurement Techniques
-Measuring the vibrations ins important:
-- Measure Natural Frequencies
-- Measure frequency of the earthquake
-- Is the frequency of earthquake is close to the natural vibration
-- Period of vibration is more important in the structure analysis
+This repository contain any code related to the [Experinece with Vibration Sensor (Kemet)](https://www.element14.com/community/community/design-challenges/experimenting-with-vibration-sensors/blog/authors/yosoufe?ICID=DCH-vibrationSense-challengers) challenge at element14.
 
-- Using the accelerometer as sensor
-- Velocimeter
+# Measurement and Structural Analysis
 
-For Earthquake:
-- Construction may need 1-3 Hz frequency
-- Taller buildings even would create lower frequency like 0.5 Hz
-- These are the whole buildings
-- A truss may have a larger natural frequency.
+In order to analyse buildings and structures it is important to 
+measure the natrual frequency of the structure. It is usally tried
+to make the natrual frequency of the structure away from the frequency of 
+the earthquke.
 
-Processing:
-- Convert the voltage to the physical value like meter, m/s or m/s^2
-- FFT is one of the methods to get the frequency of different modes.
+Natrual frequency of the compelete structure of buildings is 
+usally around 1-3 Hz. Taller the building, lower the natural frequency. 
+For example very tall buildings can even have a natural frequency of 0.5 Hz.
+But natural frequency of the parts of the building, for example single truss 
+can be larger like around 10-20 Hz.
+
+Vibration of the building is analysed using different sensors
+like accelerometr or velocimeter.
+
+In order to make a meaning from the sensor data, first step is to conver the 
+voltage to physical value like in meters, m/s or m/s^2. Then usually 
+FFT (Fast Fourier Transform) is used to extract natrual frequencies.
+
+
+There can be different setup to measure the natural frequencies. For example one set of Sensor Mountings can be
+- 1 sensor in the base of the structure to measure the vibration triggering input.
+- 1 sensor at the top of the structure to measure the vibration caused by the trigerring input. 
+- Based on the input and output, system identification is done.
+- To find out different modes of buildings:
+    - Mount a 3rd or more sensors in different location in the structure which has some vibrations to measure at the second, third or more modes of vibrations
+
+There are different ways to cause the vibration in the structure:
+- Waiting for earthquake, To measure the damage
+    - May show None linear behavior.
+    - Elasticity factors and other parameters are changing and system can be nonlinear now.
+- Capturing ambient vibrations, To measure the frequencies.
+    - Filtering may be needed
+- Create artificial vibration.
+
+Time step should be minimum twice of maximum frequency of the structure. (Nyquist Frequency)
 
 Data about Earthquakes
 - https://www.usgs.gov/
 
-
-Sensor Mountings:
-- 1 sensor in the head as output
-- 1 sensor in base as input
-- Based on the input and output they do the system identification.
-- To find out different modes of buildings:
-    - Mount a 3rd sensor in different point which has some vibrations to measure the second mode.
-
-How to trigger:
-- Waiting for earthquake, To measure the damage
-    - May show None linear behavior.
-    - Elasticity factors and other parameters are changing and nonlinear now.
-- Capturing ambient vibrations, To measure the frequencies.
-    - Filtering may be needed
-
-
-Time step should be minimum twice of maximum frequency of the structure. (Nyquist Frequency)
-
 Test:
 - Create input vibration, You should know the input and do not consider the input as output.
-You should use bump method. Induce the short vibration with like a hammer. From that moment system does the free 
+You should use bump method. Induce the short vibration like a hammer. From that moment system does the free 
 vibration. Sudden hit can be [0.1 - 0.2] seconds. One jump or dropping a weight could simulate it.
 The hit should be close to the sensor.
 
