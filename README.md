@@ -34,15 +34,14 @@ FFT (Fast Fourier Transform) is used to extract natrual frequencies.
 
 
 There can be different setup to measure the natural frequencies. For example one set of Sensor Mountings can be
-- 1 sensor in the base of the structure to measure the vibration triggering input.
-- 1 sensor at the top of the structure to measure the vibration caused by the trigerring input. 
+- 1 sensor in the base of the structure to measure the source of the vibration.
+- 1 sensor at the top of the structure to measure the vibration caused by the source after going throught the structure. 
 - Based on the input and output, system identification is done.
-- To find out different modes of buildings:
-    - Mount a 3rd or more sensors in different location in the structure which has some vibrations to measure at the second, third or more modes of vibrations
+- To find out different modes of buildings 3rd or more sensors are mounted in different locations in the structure which has some displacement to measure the second, third or more modes of vibrations
 
 There are different ways to cause the vibration in the structure:
 - Waiting for earthquake, To measure the damage
-    - May show None linear behavior.
+    - May show non-linear behavior.
     - Elasticity factors and other parameters are changing and system can be nonlinear now.
 - Capturing ambient vibrations, To measure the frequencies.
     - Filtering may be needed
