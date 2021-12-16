@@ -1,6 +1,6 @@
-# [Experinece with Vibration Sensor (Kemet)](https://www.element14.com/community/community/design-challenges/experimenting-with-vibration-sensors/blog/authors/yosoufe?ICID=DCH-vibrationSense-challengers)
+# [Experinece with Vibration Sensor (Kemet)](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/)
 
-This repository contain any code related to the [Experinece with Vibration Sensor (Kemet)](https://www.element14.com/community/community/design-challenges/experimenting-with-vibration-sensors/blog/authors/yosoufe?ICID=DCH-vibrationSense-challengers) challenge at element14.
+This repository contain any code related to the [Experinece with Vibration Sensor (Kemet)](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/) challenge at element14.
 
 # Measurement and Structural Analysis
 
