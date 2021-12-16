@@ -1,6 +1,16 @@
 # [Experinece with Vibration Sensor (Kemet)](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/)
 
-This repository contain any code related to the [Experinece with Vibration Sensor (Kemet)](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/) challenge at element14. [Here is a list of my blogs](https://community.element14.com/search?q=*&category=#serpauthor=58746&serpgroup=151&serpcategory=blog&serp=2)
+This repository contain any code related to the [Experinece with Vibration Sensor (Kemet)](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/) challenge at element14.
+
+Here is a list of my blogs:
+- [Introduction - Blog #1](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/b/blog/posts/vibration-sensor-and-exercising---introduction---blog-1)
+- [Basic Experiments - Blog #2](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/b/blog/posts/vibration-sensor-and-exercising---basic-experiments---blog-2)
+- [Calculating FFT on Nucleo Board - Blog #3](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/b/blog/posts/vibration-sensor-and-exercising---calculating-fft-on-nucleo-board---blog-3)
+- [Setup to Measure Floor's Vibration and Threshold Alerts Logic - Blog #4](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/b/blog/posts/vibration-sensor-and-exercising---setup-to-measure-floor-s-vibration-and-threshold-alerts-logic---blog-4)
+- [High Vibration Detection on Nucleo Board, BLE and Telegram Bot - Blog #5](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/b/blog/posts/vibration-sensor-and-exercising---high-vibration-detection-on-nucleo-board-alone-no-jetson-nano-and-telegram-bot---blog-5)
+- [What I learned and Summary - Blog #6](https://community.element14.com/challenges-projects/design-challenges/experimenting-with-vibration-sensors/b/blog/posts/vibration-sensor-and-exercising---what-i-learned-and-summary---blog-6)
+
+![Vibration sensor in my 3D Printed mount](https://user-images.githubusercontent.com/7648675/146323373-0eefc5b8-88f6-4cdc-8edf-b88515cafa4e.png)
 
 # Measurement and Structural Analysis
 
